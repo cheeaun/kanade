@@ -1,0 +1,198 @@
+body{
+	font-family: helvetica, arial, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	background-color: #efefef;
+}
+*{
+	-webkit-touch-callout: none;
+	-webkit-text-size-adjust: none;
+}
+header{
+	color: #fff;
+	background-color: #86a4fe;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#86a4fe), to(#5d76ea)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #86a4fe, #5d76ea); /* Chrome 10+, Saf5.1+ */
+	background-image: -moz-linear-gradient(top, #86a4fe, #5d76ea); /* FF3.6 */
+	background-image: -ms-linear-gradient(top, #86a4fe, #5d76ea); /* IE10 */
+	background-image: -o-linear-gradient(top, #86a4fe, #5d76ea); /* Opera 11.10+ */
+	background-image: linear-gradient(top, #86a4fe, #5d76ea);
+	line-height: 42px;
+	height: 42px;
+	border-top: 1px solid #c5d4ff;
+	border-bottom: 1px solid #4b61b3;
+	position: absolute;
+	width: 100%;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+}
+header h1{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 20px;
+	text-shadow: 0 -1px rgba(0,0,0,.5);
+}
+#back{
+	display: none;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 12px;
+	color: #fff;
+	background-color: rgba(0,0,0,.15);
+	border: 1px solid rgba(0,0,0,.3);
+	text-shadow: 0 -1px rgba(0,0,0,.5);
+	font-weight: bold;
+	padding: 0 10px;
+	text-decoration: none;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 1px rgba(255,255,255,.5);
+	-ms-box-shadow: 0 1px rgba(255,255,255,.5);
+	-o-box-shadow: 0 1px rgba(255,255,255,.5);
+	box-shadow: 0 1px rgba(255,255,255,.5);
+}
+#back.active{
+	background-color: rgba(0,0,0,.25);
+}
+#seasons{
+	right: 5px;
+}
+#sort{
+	left: 5px;
+	display: none;
+}
+#seasons, #sort{
+	position: absolute;
+	top: 8px;
+	font-size: 75%;
+	border: 1px solid #5d76ea;
+	color: rgba(0,0,0,.7);
+	text-shadow: 0 1px #fff;
+}
+#seasons option, #sort option{
+	text-shadow: none;
+}
+#spinner{
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	display: none;
+}
+#container,
+#image{
+	position: absolute;
+	top: 44px;
+	bottom: 0;
+	width: 100%;
+}
+#progress{
+	width: 0;
+	height: 2px;
+	background-color: #85a7fe;
+	-webkit-transition: .4s width;
+	-moz-transition: .4s width;
+	-ms-transition: .4s width;
+	-o-transition: .4s width;
+	transition: .4s width;
+}
+#blank{
+	min-height: 300px;
+	padding: 20px;
+	color: #444;
+	text-align: center;
+	line-height: 1.5em;
+	text-shadow: 0 1px #fff;
+}
+.animes-list{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #fff;
+}
+.animes-list li{
+	display: block;
+	overflow: hidden;
+	border-bottom: 1px solid #e0e0e0;
+	line-height: 1.2em;
+}
+.animes-list h2{
+	font-size: 100%;
+	margin: 5px 0 0;
+	padding: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.animes-list a{
+	text-decoration: none;
+	color: #1765CD;
+}
+.animes-list h2.active a,
+.animes-list a.active{
+	background-color: #bbceff;
+}
+.animes-list .img{
+	float: left;
+	display: block;
+	width: 50px;
+	height: 70px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	margin-right: 7px;
+}
+.animes-list .score{
+	float: right;
+	font-size: 90%;
+	font-weight: bold;
+	line-height: 1em;
+	color: #fff;
+	background-color: #ccc;
+	padding: 2px 5px;
+	margin: 3px 10px 0 0;
+	text-shadow: 0 -1px rgba(0,0,0,.2);
+	border-radius: 3px;
+}
+.animes-list .score.good{
+	background-color: #374ebe;
+}
+.animes-list .score.ok{
+	background-color: #85a7fe;
+}
+.animes-list .episodes{
+	font-size: 80%;
+	line-height: 1em;
+}
+.animes-list .genres{
+	color: #666;
+	font-size: 80%;
+	line-height: 1em;
+}
+#count{
+	padding: 10px;
+	color: #666;
+	text-align: center;
+	text-shadow: 0 1px #fff;
+}
+#image{
+	text-align: center;
+	color: #666;
+	text-shadow: 0 1px #fff;
+}
+#image img{
+	margin: 10px 10px 5px;
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	-ms-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	-o-box-shadow: 0 0 10px rgba(0,0,0,.5);
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+#image p{
+	margin: 0;
+	padding: 0 10px 10px;
+}

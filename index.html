@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<title>Kanade</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="tenshi.css">
+<script async>
+LazyLoad=function(a){function f(){var a=i.css,b;if(a){for(b=l.length;--b>=0;)if(l[b].href===a.urls[0]){c("css");break}j+=1,a&&(j<200?setTimeout(f,50):c("css"))}}function e(e,j,l,o,q){var t=function(){c(e)},v=e==="css",w,x,y,z;d();if(j)if(j=typeof j=="string"?[j]:j.concat(),v||g.async||g.gecko||g.opera)k[e].push({urls:j,callback:l,obj:o,context:q});else{w=0;for(x=j.length;w<x;++w)k[e].push({urls:[j[w]],callback:w===x-1?l:null,obj:o,context:q})}if(!i[e]&&(z=i[e]=k[e].shift())){h||(h=a.head||a.getElementsByTagName("head")[0]),j=z.urls,w=0;for(x=j.length;w<x;++w)l=j[w],v?y=g.gecko?b("style"):b("link",{href:l,rel:"stylesheet"}):(y=b("script",{src:l}),y.async=!1),y.className="lazyload",y.setAttribute("charset","utf-8"),g.ie&&!v?y.onreadystatechange=function(){/loaded|complete/.test(y.readyState)&&(y.onreadystatechange=null,t())}:v&&(g.gecko||g.webkit)?g.webkit?(z.urls[w]=y.href,f()):(y.innerHTML='@import "'+l+'";',c("css")):y.onload=y.onerror=t,h.appendChild(y)}}function d(){if(!g){var b=navigator.userAgent;g={async:a.createElement("script").async===!0},(g.webkit=/AppleWebKit\//.test(b))||(g.ie=/MSIE/.test(b))||(g.opera=/Opera/.test(b))||(g.gecko=/Gecko\//.test(b))||(g.unknown=!0)}}function c(a){var b=i[a],c,d;b&&(c=b.callback,d=b.urls,d.shift(),j=0,d.length||(c&&c.call(b.context,b.obj),i[a]=null,k[a].length&&e(a)))}function b(b,c){var d=a.createElement(b),e;for(e in c)c.hasOwnProperty(e)&&d.setAttribute(e,c[e]);return d}var g,h,i={},j=0,k={css:[],js:[]},l=a.styleSheets;return{css:function(a,b,c,d){e("css",a,b,c,d)},js:function(a,b,c,d){e("js",a,b,c,d)}}}(this.document)
+LazyLoad.js(['microajax.min.js', 'kizzy.min.js', 'iscroll-lite-min.js', 'tenshi.js'])
+</script>
+<header>
+<h1>Kanade</h1>
+	<a href="#" id="back">Back</a>
+	<select id="seasons">
+		<option>Season</option>
+	</select>
+	<select id="sort">
+		<option>Sort</option>
+		<option>Name</option>
+		<option>Score</option>
+	</select>
+	<img src="loader.gif" width="16" height="16" alt="" id="spinner">
+</header>
+<div id="container">
+	<div>
+		<div id="progress"></div>
+		<div id="blank"><p>Hi there. I'm Kanade.</p><p>I help you see &amp; compare scores of anime series for every season so that you can quickly decide which one to&nbsp;watch.</p><p>Start by selecting a season.</p></div>
+		<ul class="animes-list" id="animes">
+		</ul>
+		<div id="count"></div>
+	</div>
+</div>
+<div id="image"><div></div></div>
