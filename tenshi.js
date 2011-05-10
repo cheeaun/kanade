@@ -171,7 +171,7 @@
 	}
 	
 	microAjax('seasons.json', function(r){
-		r = JSON.parse(r);
+		r = eval('(' + r + ')');
 		if (!r || !r.seasons) return;
 		$seasons = r.seasons;
 		var seasonsHTML = '';
