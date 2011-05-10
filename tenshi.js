@@ -100,7 +100,10 @@
 					i++;
 				};
 			
-			if (blankDiv) blankDiv.parentNode.removeChild(blankDiv);
+			if (blankDiv){
+				blankDiv.parentNode.removeChild(blankDiv);
+				blankDiv = null;
+			}
 			sortSelect.style.display = 'none';
 			seasonsSelect.style.display = 'none';
 			spinner.style.display = 'block';
