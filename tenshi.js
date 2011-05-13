@@ -104,6 +104,7 @@
 				blankDiv.parentNode.removeChild(blankDiv);
 				blankDiv = null;
 			}
+			sortSelect.selectedIndex = 0;
 			sortSelect.style.display = 'none';
 			seasonsSelect.style.display = 'none';
 			spinner.style.display = 'block';
@@ -148,20 +149,20 @@
 	imageDiv.style.display = 'none';
 	
 	if ($ios){
-		// Totally hide the location bar
-		var adjustHeight = function(){
-			d.body.style.height = screen.height + 'px';
-			setTimeout(function(){
-				$top();
-				var height = w.innerHeight,
-					offsetTop = container.offsetTop;
-				d.body.style.height = height;
-				container.style.height = (height - offsetTop) + 'px';
-				imageDiv.style.height = (height - offsetTop) + 'px';
-				$scroll.refresh();
-				$imgScroll.refresh();
-			}, 500);
-		};
+		var body = d.body,
+			adjustHeight = function(){ // Totally hide the location bar
+				body.style.height = screen.height + 'px';
+				setTimeout(function(){
+					$top();
+					var height = w.innerHeight,
+						offsetTop = container.offsetTop;
+					body.style.height = height;
+					container.style.height = (height - offsetTop) + 'px';
+					imageDiv.style.height = (height - offsetTop) + 'px';
+					$scroll.refresh();
+					$imgScroll.refresh();
+				}, 500);
+			};
 		adjustHeight(true);
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
@@ -203,7 +204,12 @@
 	sortSelect.addEventListener('change', function(){
 		$top();
 		var index = sortSelect.selectedIndex;
-		if (!index || index == selectedSort || !$data.length) return;
+		if (!$data.length) return;
+		if (!index){
+			selectedSort = 0;
+			return;
+		}
+		if (index == selectedSort) return;
 		selectedSort = index;
 		var option = sortSelect.options[index],
 			text = option.text.toLowerCase(),
