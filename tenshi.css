@@ -186,6 +186,9 @@ header h1{
 	text-shadow: 0 1px #fff;
 }
 #image img{
+	background-color: #fff;
+	min-width: 200px;
+	min-height: 200px;
 	margin: 10px 10px 5px;
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
 	-moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
