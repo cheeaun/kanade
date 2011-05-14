@@ -155,7 +155,7 @@
 				setTimeout(function(){
 					$top();
 					var height = w.innerHeight,
-						offsetTop = container.offsetTop;
+						offsetTop = d.querySelector('header').offsetHeight;
 					body.style.height = height;
 					container.style.height = (height - offsetTop) + 'px';
 					imageDiv.style.height = (height - offsetTop) + 'px';

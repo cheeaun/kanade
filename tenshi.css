@@ -200,3 +200,31 @@ header h1{
 	margin: 0;
 	padding: 0 10px 10px;
 }
+
+@media only screen and (orientation: landscape){
+	header{
+		line-height: 32px;
+		height: 32px;
+	}
+	header h1{
+		font-size: 16px;
+	}
+	#back{
+		line-height: 20px;
+		height: 20px;
+		top: 4px;
+	}
+	#seasons, #sort{
+		top: 4px;
+	}
+	#container,
+	#image{
+		top: 32px;
+	}
+	#blank{
+		min-height: 200px;
+	}
+	#spinner{
+		top: 8px;
+	}
+}
