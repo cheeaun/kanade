@@ -251,22 +251,33 @@
 		$scroll.refresh();
 	}, false);
 	
-	if ($touch) animesDiv.addEventListener('touchstart', function(e){
+	if ($touch){
+		animesDiv.addEventListener('touchstart', function(e){
+			var el = e.target,
+				tagName = el.tagName;
+			if (!tagName) return;
+			tagName = tagName.toLowerCase();
+			if (tagName == 'div' && el.className == 'img'){
+				el.style.opacity = .6;
+			}
+		}, false);
+		animesDiv.addEventListener('touchend', function(e){
+			var el = e.target,
+			tagName = el.tagName;
+			if (!tagName) return;
+			tagName = tagName.toLowerCase();
+			if (tagName == 'div' && el.className == 'img'){
+				el.style.opacity = 1;
+			}
+		}, false);
+	}
+	// the click event is specially modified by iScroll. Nice.
+	animesDiv.addEventListener('click', function(e){
 		var el = e.target,
 			tagName = el.tagName;
 		if (!tagName) return;
 		tagName = tagName.toLowerCase();
 		if (tagName == 'div' && el.className == 'img'){
-			el.style.opacity = .6;
-		}
-	}, false);
-	animesDiv.addEventListener($touch ? 'touchend' : 'click', function(e){
-		var el = e.target,
-			tagName = el.tagName;
-		if (!tagName) return;
-		tagName = tagName.toLowerCase();
-		if (tagName == 'div' && el.className == 'img'){
-			el.style.opacity = 1;
 			container.style.display = 'none';
 			seasonsSelect.style.display = 'none';
 			sortSelect.style.display = 'none';
