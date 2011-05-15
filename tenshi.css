@@ -181,6 +181,7 @@ header h1{
 	text-shadow: 0 1px #fff;
 }
 #image{
+	clip: rect(0, 0, 0, 0);
 	text-align: center;
 	color: #666;
 	text-shadow: 0 1px #fff;
@@ -201,7 +202,7 @@ header h1{
 	padding: 0 10px 10px;
 }
 
-@media only screen and (orientation: landscape){
+@media only screen and (max-height: 300px){
 	header{
 		line-height: 32px;
 		height: 32px;
@@ -219,7 +220,7 @@ header h1{
 	}
 	#container,
 	#image{
-		top: 32px;
+		top: 34px;
 	}
 	#blank{
 		min-height: 200px;

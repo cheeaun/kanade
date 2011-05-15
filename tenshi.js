@@ -145,9 +145,6 @@
 			if (animesLeft.length) req();
 		};
 	
-	// iScroll runs first then hide this
-	imageDiv.style.display = 'none';
-	
 	if ($ios){
 		var body = d.body,
 			adjustHeight = function(){ // Totally hide the location bar
@@ -161,7 +158,7 @@
 					imageDiv.style.height = (height - offsetTop) + 'px';
 					$scroll.refresh();
 					$imgScroll.refresh();
-				}, 500);
+				}, 50);
 			};
 		adjustHeight(true);
 		d.addEventListener('touchend', $top, false);
@@ -172,7 +169,7 @@
 	}
 	
 	microAjax('seasons.json', function(r){
-		r = eval('(' + r + ')');
+		r = JSON.parse(r);
 		if (!r || !r.seasons) return;
 		$seasons = r.seasons;
 		var seasonsHTML = '';
@@ -278,11 +275,11 @@
 		if (!tagName) return;
 		tagName = tagName.toLowerCase();
 		if (tagName == 'div' && el.className == 'img'){
-			container.style.display = 'none';
+			container.style.clip = 'rect(0, 0, 0, 0)';
 			seasonsSelect.style.display = 'none';
 			sortSelect.style.display = 'none';
 			backButton.style.display = 'block';
-			imageDiv.style.display = 'block';
+			imageDiv.style.clip = 'auto';
 			
 			var anime = $cache.get(el.parentNode.id.split('-')[1]) || {title: ''},
 				div = imageDiv.firstChild,
@@ -312,14 +309,18 @@
 	}, false);
 	backButton.addEventListener($touch ? 'touchend' : 'click', function(e){
 		e.preventDefault();
-		container.style.display = 'block';
+		container.style.clip = 'auto';
 		backButton.style.display = 'none';
 		spinner.style.display = 'none';
-		imageDiv.style.display = 'none';
+		imageDiv.style.clip = 'rect(0, 0, 0, 0)';
 		imageDiv.firstChild.innerHTML = '';
 		setTimeout(function(){
 			seasonsSelect.style.display = 'block';
 			sortSelect.style.display = 'block';
-		}, 100);
+			$scroll.refresh();
+		}, 200);
+	}, false);
+	if ($touch) backButton.addEventListener('click', function(e){
+		e.preventDefault();
 	}, false);
 }(window, document));
