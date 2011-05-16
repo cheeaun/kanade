@@ -154,8 +154,8 @@
 					var height = w.innerHeight,
 						offsetTop = d.querySelector('header').offsetHeight;
 					body.style.height = height;
-					container.style.height = (height - offsetTop) + 'px';
-					imageDiv.style.height = (height - offsetTop) + 'px';
+					container.style.height = container.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
+					imageDiv.style.height = imageDiv.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
 					$scroll.refresh();
 					$imgScroll.refresh();
 				}, 50);

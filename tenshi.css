@@ -101,7 +101,6 @@ header h1{
 	transition: .4s width;
 }
 #blank{
-	min-height: 300px;
 	padding: 20px;
 	color: #444;
 	text-align: center;
@@ -221,9 +220,6 @@ header h1{
 	#container,
 	#image{
 		top: 34px;
-	}
-	#blank{
-		min-height: 200px;
 	}
 	#spinner{
 		top: 8px;
