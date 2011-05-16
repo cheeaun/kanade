@@ -4,8 +4,8 @@
 		animeItemTmpl = '<li id="anime-{id}">'
 			+ '<div class="img" style="background-image: url({image})" data-image="{image}"></div>'
 			+ '<h2><a href="{url}" target="_blank">{title}</a></h2>'
-			+ '<div><span class="score {scoreColor}">{score}</span> '
-			+ '<span class="episodes">{episodes} episodes</span></div>'
+			+ '<span class="score {scoreColor}">{score}</span> '
+			+ '<span class="episodes">{episodes} episodes</span>'
 			+ '<div class="genres">{genres}</div>'
 			+ '</li>',
 		$cache = kizzy('animes'),
