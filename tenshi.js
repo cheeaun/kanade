@@ -166,6 +166,12 @@
 		d.querySelector('header h1').addEventListener($touch ? 'touchend' : 'click', function(e){
 			$scroll.scrollTo(0, 0, 250);
 		}, false);
+		d.addEventListener('scroll', function(){
+			if (w.pageYOffset == 0){
+				$scroll.scrollTo(0, 0, 250);
+				$imgScroll.scrollTo(0, 0, 250);
+			}
+		}, false);
 	}
 	
 	microAjax('seasons.json', function(r){
