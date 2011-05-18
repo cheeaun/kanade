@@ -51,8 +51,7 @@
 			el.style.clip = 'rect(0, 0, 0, 0)';
 		},
 		$show = function(el){
-			var position = el.getAttribute('data-position');
-			if (position) el.style.position = position;
+			el.style.position = el.getAttribute('data-position') || '';
 			el.style.clip = '';
 		},
 		loadAnimes = function(year, season){
@@ -164,6 +163,7 @@
 			$hide(animesDiv);
 			countDiv.innerHTML = '';
 			container.className = 'scroll';
+			scroll.home.refresh();
 		}
 	};
 	w.addEventListener('hashchange', loadPage, false);
