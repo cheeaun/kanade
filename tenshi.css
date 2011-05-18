@@ -9,6 +9,12 @@ body{
 	-webkit-touch-callout: none;
 	-webkit-text-size-adjust: none;
 }
+.page{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
 header{
 	color: #fff;
 	background-color: #86a4fe;
@@ -28,19 +34,21 @@ header{
 	-webkit-touch-callout: none;
 }
 header h1{
-	margin: 0;
 	padding: 0;
 	text-align: center;
 	font-size: 20px;
 	text-shadow: 0 -1px rgba(0,0,0,.5);
+	margin: 0 80px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
-#back{
-	display: none;
+#close-image{
 	position: absolute;
-	top: 8px;
-	left: 10px;
-	height: 24px;
-	line-height: 24px;
+	top: 6px;
+	right: 10px;
+	height: 28px;
+	line-height: 28px;
 	font-size: 12px;
 	color: #fff;
 	background-color: rgba(0,0,0,.15);
@@ -56,17 +64,8 @@ header h1{
 	-o-box-shadow: 0 1px rgba(255,255,255,.5);
 	box-shadow: 0 1px rgba(255,255,255,.5);
 }
-#back.active{
-	background-color: rgba(0,0,0,.25);
-}
 #seasons{
 	right: 5px;
-}
-#sort{
-	left: 5px;
-	display: none;
-}
-#seasons, #sort{
 	position: absolute;
 	top: 8px;
 	font-size: 75%;
@@ -74,31 +73,17 @@ header h1{
 	color: rgba(0,0,0,.7);
 	text-shadow: 0 1px #fff;
 }
-#seasons option, #sort option{
+#seasons option{
 	text-shadow: none;
 }
-#spinner{
-	position: absolute;
-	top: 12px;
-	right: 10px;
-	display: none;
+.loading{
+	background: transparent url(loading.gif) center no-repeat;
 }
-#container,
-#image{
+.scroll{
 	position: absolute;
 	top: 44px;
 	bottom: 0;
 	width: 100%;
-}
-#progress{
-	width: 0;
-	height: 2px;
-	background-color: #85a7fe;
-	-webkit-transition: .4s width;
-	-moz-transition: .4s width;
-	-ms-transition: .4s width;
-	-o-transition: .4s width;
-	transition: .4s width;
 }
 #blank{
 	padding: 20px;
@@ -112,6 +97,8 @@ header h1{
 	padding: 0;
 	list-style: none;
 	background-color: #fff;
+	-webkit-box-shadow: 0 0 30px rgba(0,0,0,.2);
+	box-shadow: 0 0 30px rgba(0,0,0,.2);
 }
 .animes-list li{
 	display: block;
@@ -126,6 +113,7 @@ header h1{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	color: #1765CD;
 }
 .animes-list a{
 	text-decoration: none;
@@ -158,6 +146,9 @@ header h1{
 	text-shadow: 0 -1px rgba(0,0,0,.2);
 	border-radius: 3px;
 }
+.animes-list .score.mad{
+	background-color: #bd3737;
+}
 .animes-list .score.good{
 	background-color: #374ebe;
 }
@@ -180,13 +171,13 @@ header h1{
 	text-shadow: 0 1px #fff;
 }
 #image{
-	clip: rect(0, 0, 0, 0);
+	background-color: #efefef;
 	text-align: center;
 	color: #666;
 	text-shadow: 0 1px #fff;
 }
 #image img{
-	background-color: #fff;
+	background: #fff url(loading.gif) center no-repeat;
 	min-width: 200px;
 	min-height: 200px;
 	margin: 10px 10px 5px;
@@ -201,6 +192,137 @@ header h1{
 	padding: 0 10px 10px;
 }
 
+/* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
+Built by David Kaneda and maintained by Jonathan Stark.
+*/
+.in, .out {
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 350ms;
+}
+
+.slide.in {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideinfromright;
+}
+
+.slide.out {
+	-webkit-transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+}
+
+.slide.in.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideinfromleft;
+}
+
+.slide.out.reverse {
+	-webkit-transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+}
+
+.slideup.in {
+	-webkit-transform: translateY(0);
+	-webkit-animation-name: slideinfrombottom;
+	z-index: 10;
+}
+
+.slideup.out {
+	-webkit-animation-name: dontmove;
+	z-index: 0;
+}
+
+.slideup.out.reverse {
+	-webkit-transform: translateY(100%);
+	z-index: 10;
+	-webkit-animation-name: slideouttobottom;
+}
+
+.slideup.in.reverse {
+	z-index: 0;
+	-webkit-animation-name: dontmove;
+}
+.slidedown.in {
+	-webkit-transform: translateY(0);
+	-webkit-animation-name: slideinfromtop;
+	z-index: 10;
+}
+
+.slidedown.out {
+	-webkit-animation-name: dontmove;
+	z-index: 0;
+}
+
+.slidedown.out.reverse {
+	-webkit-transform: translateY(-100%);
+	z-index: 10;
+	-webkit-animation-name: slideouttotop;
+}
+
+.slidedown.in.reverse {
+	z-index: 0;
+	-webkit-animation-name: dontmove;
+}
+
+@-webkit-keyframes slideinfromright {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@-webkit-keyframes slideinfromleft {
+    from { -webkit-transform: translateX(-100%); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@-webkit-keyframes slideouttoleft {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(-100%); }
+}
+
+@-webkit-keyframes slideouttoright {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(100%); }
+}
+
+
+@-webkit-keyframes slideinfromtop {
+    from { -webkit-transform: translateY(-100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideinfrombottom {
+    from { -webkit-transform: translateY(100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideouttobottom {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(100%); }
+}
+
+@-webkit-keyframes slideouttotop {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(-100%); }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade.in {
+	opacity: 1;
+	z-index: 10;
+	-webkit-animation-name: fadein;
+}
+.fade.out {
+	z-index: 0;
+	-webkit-animation-name: fadeout;
+}
+
 @media only screen and (max-height: 300px){
 	header{
 		line-height: 32px;
@@ -209,19 +331,15 @@ header h1{
 	header h1{
 		font-size: 16px;
 	}
-	#back{
-		line-height: 20px;
-		height: 20px;
+	#close-image{
+		line-height: 22px;
+		height: 22px;
 		top: 4px;
 	}
-	#seasons, #sort{
+	#seasons{
 		top: 4px;
 	}
-	#container,
-	#image{
+	.scroll{
 		top: 34px;
-	}
-	#spinner{
-		top: 8px;
 	}
 }

@@ -18,26 +18,28 @@ if (document.domain == 'cheeaun.github.com') (function(){
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-<header>
-<h1>Kanade</h1>
-	<a href="#" id="back">Back</a>
-	<select id="seasons">
-		<option>Season</option>
-	</select>
-	<select id="sort">
-		<option>Sort</option>
-		<option>Name</option>
-		<option>Score</option>
-	</select>
-	<img src="loader.gif" width="16" height="16" alt="" id="spinner">
-</header>
-<div id="container">
-	<div>
-		<div id="progress"></div>
-		<div id="blank"><p>Hi there. I'm Kanade.</p><p>I help you see &amp; compare scores of anime series for every season so that you can quickly decide which one to&nbsp;watch.</p><p>Start by selecting a season.</p></div>
-		<ul class="animes-list" id="animes">
-		</ul>
-		<div id="count"></div>
+<div class="page" id="page-home">
+	<header>
+	<h1>Kanade</h1>
+		<select id="seasons">
+			<option>Season</option>
+		</select>
+	</header>
+	<div class="scroll" id="container">
+		<div>
+			<div id="blank"><p>Hi there. I'm Kanade.</p><p>I help you see &amp; compare scores of anime series for every season so that you can quickly decide which one to&nbsp;watch.</p><p>Start by selecting a season.</p></div>
+			<ul class="animes-list" id="animes">
+			</ul>
+			<div id="count"></div>
+		</div>
 	</div>
 </div>
-<div id="image"><div></div></div>
+<div class="page" id="page-image" style="clip: rect(0, 0, 0, 0)">
+	<header>
+	<h1></h1>
+	<button id="close-image">Close</button>
+	</header>
+	<div class="scroll" id="image">
+		<div></div>
+	</div>
+</div>

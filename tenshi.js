@@ -33,31 +33,60 @@
 		$data = [],
 		$ios = /ip(?:ad|od|hone)/.test(navigator.userAgent.toLowerCase()),
 		$touch = 'ontouchend' in document,
-		$scroll = $ios ? new iScroll('container') : { refresh: function(){} },
-		$imgScroll = $ios ? new iScroll('image') : { refresh: function(){} },
-		backButton = $('back'),
+		closeImageButton = $('close-image'),
 		container = $('container'),
 		blankDiv = $('blank'),
 		seasonsSelect = $('seasons'),
-		spinner = $('spinner'),
 		animesDiv = $('animes'),
-		progressDiv = $('progress'),
-		sortSelect = $('sort'),
 		countDiv = $('count'),
 		imageDiv = $('image'),
+		page = {},
+		scroll = {},
+		pages = d.querySelectorAll('.page'),
+		hash = location.hash.slice(1),
+		noop = function(){},
+		$hide = function(el){
+			el.setAttribute('data-position', el.style.position);
+			el.style.position = 'absolute';
+			el.style.clip = 'rect(0, 0, 0, 0)';
+		},
+		$show = function(el){
+			var position = el.getAttribute('data-position');
+			if (position) el.style.position = position;
+			el.style.clip = '';
+		},
 		loadAnimes = function(year, season){
 			var animes = $seasons[year][season],
 				i = 0, j = 0,
 				l = animes.length,
-				html = '',
 				animesLeft = [],
 				end = function(){
 					if (j>=l){
-						sortSelect.style.display = 'block';
-						seasonsSelect.style.display = '';
-						spinner.style.display = 'none';
+						container.className = 'scroll';
+						$show(seasonsSelect);
+						$data.sort(function(a, b){
+							return b.score - a.score;
+						});
+						var html = '';
+						for (var n=0; n<l; n++){
+							var o = $data[n],
+								id = o.id,
+								genres = o.genres,
+								score = parseFloat(o.score, 10);
+							html += $sub(animeItemTmpl, {
+								id: id,
+								url: malAnime + id,
+								image: o.image.replace('.jpg', 't.jpg'),
+								title: o.title,
+								score: score.toFixed(2) || '?',
+								scoreColor: score == 10 ? 'mad' : score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
+								episodes: parseInt(o.episodes, 10) || '?',
+								genres: (genres || []).join(', ')
+							});
+						}
+						animesDiv.innerHTML = html;
 						countDiv.innerHTML = l + ' anime series.<br>Tip: Tap image to see larger version.';
-						$scroll.refresh();
+						scroll.home.refresh();
 					}
 				},
 				req = function(){
@@ -68,22 +97,8 @@
 						url = apiAnime + '?id=' + id + '&callback=' + cb,
 						complete = function(o){
 							if (!o) return;
-							var genres = o.genres,
-								score = parseFloat(o.score, 10);
 							o.id = id;
 							$data.push(o);
-							animesDiv.innerHTML += $sub(animeItemTmpl, {
-								id: id,
-								url: malAnime + anime,
-								image: o.image.replace('.jpg', 't.jpg'),
-								title: o.title,
-								score: score.toFixed(2) || '?',
-								scoreColor: score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
-								episodes: parseInt(o.episodes, 10) || '?',
-								genres: (genres || []).join(', ')
-							});
-							$scroll.refresh();
-							progressDiv.style.width = Math.round(++j/l*100) + '%';
 							end();
 						},
 						comp = function(r){
@@ -100,16 +115,12 @@
 					i++;
 				};
 			
-			if (blankDiv){
-				blankDiv.parentNode.removeChild(blankDiv);
-				blankDiv = null;
-			}
-			sortSelect.selectedIndex = 0;
-			sortSelect.style.display = 'none';
-			seasonsSelect.style.display = 'none';
-			spinner.style.display = 'block';
+			$hide(blankDiv);
+			$hide(seasonsSelect);
+			$show(animesDiv);
 			countDiv.innerHTML = '';
-			progressDiv.style.width = '0';
+			container.className = 'scroll loading';
+			animesDiv.innerHTML = '';
 			$data = [];
 			
 			$top();
@@ -121,29 +132,41 @@
 				if (o){
 					o.id = id;
 					$data.push(o);
-					var genres = o.genres,
-						score = parseFloat(o.score, 10);
-					html += $sub(animeItemTmpl, {
-						id: id,
-						url: malAnime + anime,
-						image: o.image.replace('.jpg', 't.jpg'),
-						title: o.title,
-						score: score.toFixed(2) || '?',
-						scoreColor: score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
-						episodes: parseInt(o.episodes, 10) || '?',
-						genres: (genres || []).join(', ')
-					});
 					j++;
 				} else {
 					animesLeft.push(anime);
 				}
 			}
-			animesDiv.innerHTML = html;
-			progressDiv.style.width = Math.round(j/l*100) + '%';
 			end();
 			
 			if (animesLeft.length) req();
 		};
+	
+	for (var i=0, l=pages.length; i<l; i++){
+		var p = pages[i],
+			id = p.id.replace('page-', '');
+		page[id] = p;
+		var s = p.querySelector('.scroll');
+		scroll[id] = $ios ? new iScroll(s) : {refresh: noop};
+	}
+	
+	var loadPage = function(){
+		var hash = location.hash.slice(1);
+		if (/^animes/i.test(hash)){
+			var hashes = hash.split('-'),
+				year = hashes[1],
+				season = hashes[2];
+			loadAnimes(year, season);
+			seasonsSelect.value = season + '-' + year;
+		} else {
+			$show(blankDiv);
+			$show(seasonsSelect);
+			$hide(animesDiv);
+			countDiv.innerHTML = '';
+			container.className = 'scroll';
+		}
+	};
+	w.addEventListener('hashchange', loadPage, false);
 	
 	if ($ios){
 		var body = d.body,
@@ -153,23 +176,25 @@
 					$top();
 					var height = w.innerHeight,
 						offsetTop = d.querySelector('header').offsetHeight;
-					body.style.height = height;
-					container.style.height = container.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
-					imageDiv.style.height = imageDiv.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
-					$scroll.refresh();
-					$imgScroll.refresh();
+					for (var id in page){
+						var p = page[id],
+							s = p.querySelector('.scroll');
+						p.style.height = height + 'px';
+						s.style.height = s.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
+					}
+					for (var id in scroll){
+						scroll[id].refresh();
+					}
 				}, 50);
 			};
 		adjustHeight(true);
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
-		d.querySelector('header h1').addEventListener($touch ? 'touchend' : 'click', function(e){
-			$scroll.scrollTo(0, 0, 250);
-		}, false);
 		d.addEventListener('scroll', function(){
 			if (w.pageYOffset == 0){
-				$scroll.scrollTo(0, 0, 250);
-				$imgScroll.scrollTo(0, 0, 250);
+				for (var s in scroll){
+					scroll[s].scrollTo(0, 0, 250);
+				}
 			}
 		}, false);
 	}
@@ -182,7 +207,7 @@
 		for (var year in $seasons){
 			var seasons = $seasons[year];
 			for (var season in seasons){
-				seasonsHTML += '<option>' + season.replace(/\b[a-z]/g, function(match){
+				seasonsHTML += '<option value="' + season + '-' + year + '">' + season.replace(/\b[a-z]/g, function(match){
 					return match.toUpperCase();
 				}) + ' ' + year + '</option>';
 			}
@@ -192,67 +217,19 @@
 		seasonsSelect.addEventListener('change', function(){
 			$top();
 			var index = seasonsSelect.selectedIndex;
-			if (!index || index == selectedIndex) return;
+			if (!index || index == selectedIndex){
+				location.hash = '';
+				return;
+			}
 			selectedIndex = index;
 			var option = seasonsSelect.options[index],
 				text = option.text.split(' '),
 				year = parseInt(text[1], 10),
 				season = text[0].toLowerCase();
-			loadAnimes(year, season);
+			location.hash = 'animes-' + year + '-' + season;
 		}, false);
+		loadPage();
 	});
-	
-	var selectedSort = 0;
-	sortSelect.selectedIndex = 0;
-	sortSelect.addEventListener('change', function(){
-		$top();
-		var index = sortSelect.selectedIndex;
-		if (!$data.length) return;
-		if (!index){
-			selectedSort = 0;
-			return;
-		}
-		if (index == selectedSort) return;
-		selectedSort = index;
-		var option = sortSelect.options[index],
-			text = option.text.toLowerCase(),
-			sort = function(){},
-			html = '';
-		switch (text){
-			case 'score':
-				sort = function(a, b){
-					return b.score - a.score;
-				};
-				break;
-			default:
-				sort = function(a, b){
-					var at = a.title.toLowerCase(),
-						bt = b.title.toLowerCase();
-					if (at < bt) return -1;
-					if (at > bt) return 1;
-					return 0;
-				}
-		}
-		$data.sort(sort);
-		for (var i=0, l=$data.length; i<l; i++){
-			var o = $data[i],
-				id = o.id,
-				score = o.score,
-				genres = o.genres;
-			html += $sub(animeItemTmpl, {
-				id: id,
-				url: malAnime + id,
-				image: o.image.replace('.jpg', 't.jpg'),
-				title: o.title,
-				score: score.toFixed(2) || '?',
-				scoreColor: score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
-				episodes: parseInt(o.episodes, 10) || '?',
-				genres: (genres || []).join(', ')
-			})
-		}
-		animesDiv.innerHTML = html;
-		$scroll.refresh();
-	}, false);
 	
 	if ($touch){
 		animesDiv.addEventListener('touchstart', function(e){
@@ -281,52 +258,37 @@
 		if (!tagName) return;
 		tagName = tagName.toLowerCase();
 		if (tagName == 'div' && el.className == 'img'){
-			container.style.clip = 'rect(0, 0, 0, 0)';
-			seasonsSelect.style.display = 'none';
-			sortSelect.style.display = 'none';
-			backButton.style.display = 'block';
-			imageDiv.style.clip = 'auto';
+			var imageDiv = page.image;
+			$show(imageDiv);
+			imageDiv.className = 'page slideup in';
 			
 			var anime = $cache.get(el.parentNode.id.split('-')[1]) || {title: ''},
-				div = imageDiv.firstChild,
+				div = imageDiv.querySelector('.scroll div'),
 				img = new Image(),
-				src = el.getAttribute('data-image').replace('t.jpg', '.jpg'),
+				src = anime.image,
 				p = d.createElement('p');
 			img.onload = function(){
 				setTimeout(function(){
-					$imgScroll.refresh();
+					scroll.image.refresh();
 				}, 100);
-				spinner.style.display = 'none';
 			};
 			img.onabort = img.onerror = function(){
 				img.src = src + '?' + (+new Date());
-				spinner.style.display = 'none';
 			};
 			img.src = src;
 			img.alt = '';
-			p.innerHTML = anime.title;
+			p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
 			div.appendChild(img);
 			div.appendChild(p);
 			
-			spinner.style.display = 'block';
-			
-			$imgScroll.refresh();
+			scroll.image.refresh();
 		}
 	}, false);
-	backButton.addEventListener($touch ? 'touchend' : 'click', function(e){
-		e.preventDefault();
-		container.style.clip = 'auto';
-		backButton.style.display = 'none';
-		spinner.style.display = 'none';
-		imageDiv.style.clip = 'rect(0, 0, 0, 0)';
-		imageDiv.firstChild.innerHTML = '';
+	closeImageButton.addEventListener('click', function(e){
+		var imageDiv = page.image;
+		imageDiv.className = 'page slideup out reverse';
 		setTimeout(function(){
-			seasonsSelect.style.display = 'block';
-			sortSelect.style.display = 'block';
-			$scroll.refresh();
-		}, 200);
-	}, false);
-	if ($touch) backButton.addEventListener('click', function(e){
-		e.preventDefault();
+			imageDiv.querySelector('.scroll div').innerHTML = '';
+		}, 300);
 	}, false);
 }(window, document));
