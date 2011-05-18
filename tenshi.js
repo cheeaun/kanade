@@ -98,6 +98,7 @@
 							if (!o) return;
 							o.id = id;
 							$data.push(o);
+							j++;
 							end();
 						},
 						comp = function(r){
