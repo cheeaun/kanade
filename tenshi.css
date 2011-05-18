@@ -17,13 +17,13 @@ body{
 }
 header{
 	color: #fff;
-	background-color: #86a4fe;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#86a4fe), to(#5d76ea)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #86a4fe, #5d76ea); /* Chrome 10+, Saf5.1+ */
-	background-image: -moz-linear-gradient(top, #86a4fe, #5d76ea); /* FF3.6 */
-	background-image: -ms-linear-gradient(top, #86a4fe, #5d76ea); /* IE10 */
-	background-image: -o-linear-gradient(top, #86a4fe, #5d76ea); /* Opera 11.10+ */
-	background-image: linear-gradient(top, #86a4fe, #5d76ea);
+	background-color: #6d87e9;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#9eb7fe), color-stop(.5, #7e95ec), color-stop(.51, #6d87e9), to(#566cd5)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -moz-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -ms-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -o-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
 	line-height: 42px;
 	height: 42px;
 	border-top: 1px solid #c5d4ff;
