@@ -1,7 +1,7 @@
 Kanade
 ======
 
-Kanade is a mobile web app that shows a list of anime series for every season. It allows easy comparison of every series and lets you quickly decide which one to watch. You can compare the anime series by the scores, genres, episode count and cover image, and sort the list by name or score.
+Kanade is a mobile web app that shows a list of anime series for every season. It allows easy comparison of every series and lets you quickly decide which one to watch. You can compare the anime series by the scores, genres, episode count and cover image.
 
 Kanade looks like this:
 
