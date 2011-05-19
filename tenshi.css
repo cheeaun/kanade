@@ -105,6 +105,9 @@ header h1{
 	border-bottom: 1px solid #e0e0e0;
 	line-height: 1.2em;
 }
+.animes-list li:first-child{
+	border-top: 1px solid #e0e0e0;
+}
 .animes-list h2{
 	font-size: 100%;
 	margin: 5px 5px 0 0;
