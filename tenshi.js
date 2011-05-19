@@ -191,13 +191,6 @@
 		adjustHeight(true);
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
-		d.addEventListener('scroll', function(){
-			if (w.pageYOffset == 0){
-				for (var s in scroll){
-					scroll[s].scrollTo(0, 0, 250);
-				}
-			}
-		}, false);
 	}
 	
 	microAjax('seasons.json', function(r){
