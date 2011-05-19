@@ -169,6 +169,7 @@
 			container.className = 'scroll';
 			scroll.home.refresh();
 		}
+		closeImageButton.click();
 	};
 	w.addEventListener('hashchange', loadPage, false);
 	
