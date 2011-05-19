@@ -123,15 +123,13 @@ header h1{
 	background-color: #bbceff;
 }
 .animes-list .img{
-	cursor: pointer;
 	float: left;
-	display: block;
 	width: 50px;
 	height: 70px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 100% 100%;
 	margin-right: 7px;
+}
+.animes-list .img img{
+	cursor: pointer;
 }
 .animes-list .score{
 	float: right;

@@ -2,7 +2,7 @@
 	var apiAnime = 'http://kanade-api.appspot.com/v1/anime',
 		malAnime = 'http://myanimelist.net/anime/',
 		animeItemTmpl = '<li id="anime-{id}">'
-			+ '<div class="img" style="background-image: url({image})" data-image="{image}"></div>'
+			+ '<div class="img"><img src="{image}" width="50" height="70" alt=""></div>'
 			+ '<h2><a href="{url}" target="_blank">{title}</a></h2>'
 			+ '<span class="score {scoreColor}">{score}</span> '
 			+ '<span class="episodes">{episodes} episodes</span>'
@@ -148,7 +148,7 @@
 			id = p.id.replace('page-', '');
 		page[id] = p;
 		var s = p.querySelector('.scroll');
-		scroll[id] = $ios ? new iScroll(s) : {refresh: noop};
+		scroll[id] = $ios ? new iScroll(s) : {refresh: noop, scrollTo: noop};
 	}
 	
 	var loadPage = function(){
@@ -233,19 +233,23 @@
 				tagName = el.tagName;
 			if (!tagName) return;
 			tagName = tagName.toLowerCase();
-			if (tagName == 'div' && el.className == 'img'){
-				el.style.opacity = .6;
+			if (tagName == 'img'){
+				el.style.opacity = .7;
+				el.parentNode.style.backgroundColor = '#000';
 			}
 		}, false);
-		animesDiv.addEventListener('touchend', function(e){
+		var revert = function(e){
 			var el = e.target,
 			tagName = el.tagName;
 			if (!tagName) return;
 			tagName = tagName.toLowerCase();
-			if (tagName == 'div' && el.className == 'img'){
+			if (tagName == 'img'){
 				el.style.opacity = 1;
+				el.parentNode.style.backgroundColor = '';
 			}
-		}, false);
+		};
+		animesDiv.addEventListener('touchmove', revert, false);
+		animesDiv.addEventListener('touchend', revert, false);
 	}
 	// the click event is specially modified by iScroll. Nice.
 	animesDiv.addEventListener('click', function(e){
@@ -253,12 +257,12 @@
 			tagName = el.tagName;
 		if (!tagName) return;
 		tagName = tagName.toLowerCase();
-		if (tagName == 'div' && el.className == 'img'){
+		if (tagName == 'img'){
 			var imageDiv = page.image;
 			$show(imageDiv);
 			imageDiv.className = 'page slideup in';
 			
-			var anime = $cache.get(el.parentNode.id.split('-')[1]) || {title: ''},
+			var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
 				div = imageDiv.querySelector('.scroll div'),
 				img = new Image(),
 				src = anime.image,
