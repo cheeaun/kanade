@@ -86,6 +86,7 @@
 						animesDiv.innerHTML = html;
 						countDiv.innerHTML = l + ' anime series.<br>Tip: Tap image to see larger version.';
 						scroll.home.refresh();
+						scroll.home.scrollTo(0, 0, 350);
 					}
 				},
 				req = function(){
