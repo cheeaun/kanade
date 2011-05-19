@@ -148,7 +148,9 @@
 			id = p.id.replace('page-', '');
 		page[id] = p;
 		var s = p.querySelector('.scroll');
-		scroll[id] = $ios ? new iScroll(s) : {refresh: noop, scrollTo: noop};
+		scroll[id] = $ios ? new iScroll(s, {
+			hScroll: false
+		}) : {refresh: noop, scrollTo: noop};
 	}
 	
 	var loadPage = function(){
@@ -224,6 +226,9 @@
 				season = text[0].toLowerCase();
 			location.hash = 'animes-' + year + '-' + season;
 		}, false);
+		// Somehow this focus blur prevents the list from 'jumping' a little
+		seasonsSelect.focus();
+		seasonsSelect.blur();
 		loadPage();
 	});
 	
@@ -268,6 +273,7 @@
 				src = anime.image,
 				p = d.createElement('p');
 			img.onload = function(){
+				img.className = '';
 				setTimeout(function(){
 					scroll.image.refresh();
 				}, 100);
@@ -277,6 +283,7 @@
 			};
 			img.src = src;
 			img.alt = '';
+			img.className = 'loading';
 			p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
 			div.appendChild(img);
 			div.appendChild(p);
