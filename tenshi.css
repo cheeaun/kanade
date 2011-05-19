@@ -83,7 +83,7 @@ header h1{
 .scroll{
 	position: absolute;
 	top: 44px;
-	bottom: 0;
+	left: 0;
 	width: 100%;
 }
 #blank{
@@ -174,7 +174,7 @@ header h1{
 	text-shadow: 0 1px #fff;
 }
 #image img{
-	background: #fff url(loading.gif) center no-repeat;
+	background-color: #fff;
 	min-width: 200px;
 	min-height: 200px;
 	margin: 10px 10px 5px;
