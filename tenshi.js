@@ -191,6 +191,7 @@
 		adjustHeight(true);
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
+		seasonsSelect.addEventListener('focus', $top, false);
 	}
 	
 	microAjax('seasons.json', function(r){
