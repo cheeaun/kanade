@@ -292,11 +292,16 @@
 			scroll.image.refresh();
 		}
 	}, false);
-	closeImageButton.addEventListener('click', function(e){
-		var imageDiv = page.image;
-		imageDiv.className = 'page slideup out reverse';
-		setTimeout(function(){
-			imageDiv.querySelector('.scroll div').innerHTML = '';
-		}, 300);
-	}, false);
+	tappable(closeImageButton, {
+		noScroll: true,
+		onTap: function(){
+			$hide(seasonsSelect);
+			var imageDiv = page.image;
+			imageDiv.className = 'page slideup out reverse';
+			setTimeout(function(){
+				imageDiv.querySelector('.scroll div').innerHTML = '';
+				$show(seasonsSelect);
+			}, 350);
+		}
+	});
 }(window, document));
