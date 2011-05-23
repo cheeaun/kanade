@@ -19,12 +19,12 @@ body{
 header{
 	color: #fff;
 	background-color: #6d87e9;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#9eb7fe), color-stop(.5, #7e95ec), color-stop(.51, #6d87e9), to(#566cd5)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -moz-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -ms-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -o-linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: linear-gradient(top, #9eb7fe, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#a9befc), color-stop(.5, #7e95ec), color-stop(.51, #6d87e9), to(#566cd5)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -moz-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -ms-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: -o-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-image: linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
 	line-height: 42px;
 	height: 42px;
 	border-top: 1px solid #c5d4ff;
@@ -48,13 +48,15 @@ header h1{
 	position: absolute;
 	top: 6px;
 	right: 10px;
-	height: 28px;
-	line-height: 28px;
+}
+.header-button{
+	height: 29px;
+	line-height: 29px;
 	font-size: 12px;
 	color: #fff;
-	background-color: rgba(0,0,0,.1);
+	background-color: rgba(68,87,162,.3);
 	border: 1px solid rgba(0,0,0,.3);
-	text-shadow: 0 -1px rgba(0,0,0,.5);
+	text-shadow: 0 -1px rgba(0,0,0,.6);
 	font-weight: bold;
 	padding: 0 10px;
 	text-decoration: none;
@@ -66,8 +68,8 @@ header h1{
 	box-shadow: 0 1px rgba(255,255,255,.3), inset 0 1px 1px rgba(0,0,0,.2);
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-#close-image.tappable-active{
-	background-color: rgba(0,0,0,.2);
+.header-button.tappable-active{
+	background-color: rgba(68,87,162,.5);
 }
 #seasons{
 	right: 5px;
