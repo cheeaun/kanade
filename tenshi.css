@@ -3,7 +3,7 @@ body{
 	font-size: 16px;
 	margin: 0;
 	padding: 0;
-	background-color: #efefef;
+	background-color: #fff;
 }
 *{
 	-webkit-touch-callout: none;
@@ -16,19 +16,33 @@ body{
 	left: 0;
 	width: 100%;
 }
+#seasons-container{
+	background-color: #cbd2d8;
+	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
+	background-image: -webkit-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -moz-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -ms-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -o-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	-webkit-background-size: 7px 100%;
+	-moz-background-size: 7px 100%;
+	-ms-background-size: 7px 100%;
+	-o-background-size: 7px 100%;
+	background-size: 7px 100%;
+}
 header{
 	color: #fff;
-	background-color: #6d87e9;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#a9befc), color-stop(.5, #7e95ec), color-stop(.51, #6d87e9), to(#566cd5)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -moz-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -ms-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: -o-linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
-	background-image: linear-gradient(top, #a9befc, #7e95ec 50%, #6d87e9 51%, #566cd5);
+	background-color: #b2bbca;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(.5, #889bb3), color-stop(.51, #8195af), to(#6d84a2));
+	background-image: -webkit-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -moz-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -ms-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -o-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
 	line-height: 42px;
 	height: 42px;
-	border-top: 1px solid #c5d4ff;
-	border-bottom: 1px solid #4b61b3;
+	border-top: 1px solid #cdd5df;
+	border-bottom: 1px solid #2d3642;
 	position: absolute;
 	width: 100%;
 	-webkit-user-select: none;
@@ -44,18 +58,19 @@ header h1{
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
-#close-image{
-	position: absolute;
-	top: 6px;
-	right: 10px;
+.header-left{
+	left: 4px;
+}
+.header-right{
+	right: 4px;
 }
 .header-button{
+	position: absolute;
+	top: 6px;
 	height: 29px;
 	line-height: 29px;
 	font-size: 12px;
 	color: #fff;
-	background-color: rgba(68,87,162,.3);
-	border: 1px solid rgba(0,0,0,.3);
 	text-shadow: 0 -1px rgba(0,0,0,.6);
 	font-weight: bold;
 	padding: 0 10px;
@@ -67,21 +82,25 @@ header h1{
 	-o-box-shadow: 0 1px rgba(255,255,255,.3), inset 0 1px 1px rgba(0,0,0,.2);
 	box-shadow: 0 1px rgba(255,255,255,.3), inset 0 1px 1px rgba(0,0,0,.2);
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	border: 1px solid;
+	border-color: #30363e #354e71 #375074 #354e71;
+	background-color: #92a1bf;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#92a1bf), color-stop(.5, #6276a0), color-stop(.51, #556a97), to(#546993));
+	background-image: -webkit-linear-gradient(top, #92a1bf, #6276a0 50%, #556a97 51%, #546993);
+	background-image: -moz-linear-gradient(top, #92a1bf, #6276a0 50%, #556a97 51%, #546993);
+	background-image: -ms-linear-gradient(top, #92a1bf, #6276a0 50%, #556a97 51%, #546993);
+	background-image: -o-linear-gradient(top, #92a1bf, #6276a0 50%, #556a97 51%, #546993);
+	background-image: linear-gradient(top, #92a1bf, #6276a0 50%, #556a97 51%, #546993);
+	-webkit-background-clip: padding-box;
 }
 .header-button.tappable-active{
-	background-color: rgba(68,87,162,.5);
-}
-#seasons{
-	right: 5px;
-	position: absolute;
-	top: 8px;
-	font-size: 75%;
-	border: 1px solid #5d76ea;
-	color: rgba(0,0,0,.7);
-	text-shadow: 0 1px #fff;
-}
-#seasons option{
-	text-shadow: none;
+	background-color: #7d88a5;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#7d88a5), color-stop(.5, #3a4e78), color-stop(.51, #253c6a), to(#273f6d));
+	background-image: -webkit-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
+	background-image: -moz-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
+	background-image: -ms-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
+	background-image: -o-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
+	background-image: linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
 }
 .loading{
 	background: transparent url(loading.gif) center no-repeat;
@@ -92,9 +111,13 @@ header h1{
 	left: 0;
 	width: 100%;
 }
+.list-pad{
+	padding: 9px;
+	border-bottom: 9px solid rgba(0,0,0,0);
+}
 #blank{
 	padding: 20px;
-	color: #444;
+	color: #5b6c84;
 	text-align: center;
 	line-height: 1.5em;
 	text-shadow: 0 1px #fff;
@@ -113,6 +136,7 @@ header h1{
 }
 .animes-list li:first-child{
 	border-top: 1px solid #e0e0e0;
+	margin-top: -1px;
 }
 .animes-list h2{
 	font-size: 100%;
@@ -125,7 +149,7 @@ header h1{
 }
 .animes-list a{
 	text-decoration: none;
-	color: #1765CD;
+	color: #2571d8;
 }
 .animes-list h2.active a,
 .animes-list a.active{
@@ -142,15 +166,16 @@ header h1{
 }
 .animes-list .score{
 	float: right;
-	font-size: 90%;
 	font-weight: bold;
-	line-height: 1em;
 	color: #fff;
-	background-color: #ccc;
-	padding: 2px 5px;
+	background-color: #bbb;
 	margin: 3px 10px 0 0;
-	text-shadow: 0 -1px rgba(0,0,0,.2);
 	border-radius: 3px;
+	font-size: 14px;
+	padding: 0 8px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 12px;
 }
 .animes-list .score.mad{
 	background-color: #bd3737;
@@ -172,9 +197,99 @@ header h1{
 }
 #count{
 	padding: 10px;
-	color: #666;
+	color: #5b6c84;
 	text-align: center;
 	text-shadow: 0 1px #fff;
+}
+#seasons-container{
+	background-color: #efefef;
+}
+#seasons-container>div{
+	overflow: hidden;
+}
+#seasons{
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	border: 1px solid #ababab;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-background-clip: padding-box;
+	list-style: none;
+}
+#seasons li a{
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	color: #000;
+	text-decoration: none;
+	padding: 0 10px;
+	border-bottom: 1px solid #ababab;
+	height: 43px;
+	line-height: 43px;
+}
+#seasons li a b{
+	display: inline-block;
+	width: 13px;
+	height: 14px;
+	background: transparent url(check.png) no-repeat -13px 0;
+	margin: 0 6px 0 0;
+}
+#seasons li:first-child a{
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#seasons li:last-child a{
+	border: 0;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+#seasons li a span{
+	display: inline-block;
+	font-size: 14px;
+	margin: 11px 0 0;
+	padding: 0 8px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 12px;
+	background-color: #8b98b3;
+	color: #fff;
+	position: absolute;
+	right: 19px;
+}
+#seasons li a.checked{
+	color: #385487;
+}
+#seasons li a.checked b{
+	background-position: 0 0;
+}
+#seasons li a.selected{
+	color: #fff;
+	background-color: #4286f5;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
+	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
+	background-image: linear-gradient(top, #4286f5, #194fdb);
+}
+#seasons li a.selected b{
+	background-position: 0 -13px;
+}
+#seasons li a.selected span{
+	color: #4286f5;
+	background-color: #fff;
 }
 #image{
 	background-color: #efefef;
@@ -337,12 +452,15 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	header h1{
 		font-size: 16px;
 	}
+	.header-button{
+		top: 4px;
+		height: 23px;
+		line-height: 23px;
+		font-size: 11px;
+	}
 	#close-image{
 		line-height: 22px;
 		height: 22px;
-		top: 4px;
-	}
-	#seasons{
 		top: 4px;
 	}
 	.scroll{

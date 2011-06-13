@@ -33,10 +33,13 @@
 		$data = [],
 		$ios = /ip(?:ad|od|hone)/.test(navigator.userAgent.toLowerCase()),
 		$touch = 'ontouchend' in document,
+		heading = $('heading-title'),
+		closeSeasonsButton = $('close-seasons'),
 		closeImageButton = $('close-image'),
 		container = $('container'),
 		blankDiv = $('blank'),
-		seasonsSelect = $('seasons'),
+		seasonsButton = $('seasons-button'),
+		seasonsList = $('seasons'),
 		animesDiv = $('animes'),
 		countDiv = $('count'),
 		imageDiv = $('image'),
@@ -54,6 +57,16 @@
 			el.style.position = el.getAttribute('data-position') || '';
 			el.style.clip = '';
 		},
+		clean = function(str){
+			return str.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+		},
+		addClass = function(el, className){
+			if (clean(el.className).indexOf(className) > -1) return;
+			el.className = clean(el.className + ' ' + className);
+		},
+		removeClass = function(el, className){
+			el.className = el.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
+		},
 		loadAnimes = function(year, season){
 			var animes = $seasons[year][season],
 				i = 0, j = 0,
@@ -61,8 +74,8 @@
 				animesLeft = [],
 				end = function(){
 					if (j>=l){
-						container.className = 'scroll';
-						$show(seasonsSelect);
+						removeClass(container, 'loading');
+						$show(seasonsButton);
 						$data.sort(function(a, b){
 							return b.score - a.score;
 						});
@@ -75,7 +88,7 @@
 							html += $sub(animeItemTmpl, {
 								id: id,
 								url: malAnime + id,
-								image: o.image.replace('.jpg', 't.jpg'),
+								image: 'http://src.sencha.io/' + o.image.replace('.jpg', 't.jpg'),
 								title: o.title,
 								score: score.toFixed(2) || '?',
 								scoreColor: score == 10 ? 'mad' : score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
@@ -117,10 +130,10 @@
 				};
 			
 			$hide(blankDiv);
-			$hide(seasonsSelect);
+			$hide(seasonsButton);
 			$show(animesDiv);
 			countDiv.innerHTML = '';
-			container.className = 'scroll loading';
+			addClass(container, 'loading');
 			animesDiv.innerHTML = '';
 			$data = [];
 			
@@ -160,14 +173,21 @@
 				year = hashes[1],
 				season = hashes[2];
 			loadAnimes(year, season);
-			seasonsSelect.value = season + '-' + year;
+			var checkedSeason = seasonsList.querySelector('a.checked');
+			if (checkedSeason) removeClass(checkedSeason, 'checked');
+			var item = seasonsList.querySelector('a[href="#' + hash + '"]');
+			addClass(item, 'checked');
+			heading.innerHTML = season.replace(/\b[a-z]/g, function(match){
+					return match.toUpperCase();
+				}) + ' ' + year;
 		} else {
 			$show(blankDiv);
-			$show(seasonsSelect);
+			$show(seasonsButton);
 			$hide(animesDiv);
 			countDiv.innerHTML = '';
-			container.className = 'scroll';
+			removeClass(container, 'loading');
 			scroll.home.refresh();
+			heading.innerHTML = 'Kanade';
 		}
 		closeImageButton.click();
 	};
@@ -192,10 +212,14 @@
 					}
 				}, 50);
 			};
-		adjustHeight(true);
+		adjustHeight();
+		setTimeout(adjustHeight, 1000); // fail-safeness
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
-		seasonsSelect.addEventListener('focus', $top, false);
+		
+		container.addEventListener('touchstart', function(e){
+			if (container.className.indexOf('loading') != -1) e.preventDefault();
+		}, false);
 	}
 	
 	microAjax('seasons.json', function(r){
@@ -206,30 +230,76 @@
 		for (var year in $seasons){
 			var seasons = $seasons[year];
 			for (var season in seasons){
-				seasonsHTML += '<option value="' + season + '-' + year + '">' + season.replace(/\b[a-z]/g, function(match){
+				var count = seasons[season].length;
+				seasonsHTML += '<li><a href="#animes-' + year + '-' + season + '"><b></b>' + season.replace(/\b[a-z]/g, function(match){
 					return match.toUpperCase();
-				}) + ' ' + year + '</option>';
+				}) + ' ' + year + ' <span>' + count + '</span></a></li>';
 			}
 		}
-		seasonsSelect.innerHTML += seasonsHTML;
-		var selectedIndex = 0;
-		seasonsSelect.addEventListener('change', function(){
-			$top();
-			var index = seasonsSelect.selectedIndex;
-			if (!index || index == selectedIndex){
-				location.hash = '';
-				return;
+		seasonsList.innerHTML += seasonsHTML;
+		scroll.seasons.refresh();
+		
+		var startTarget, startTimer;
+		tappable(seasonsList, {
+			activeClass: null,
+			allowClick: true,
+			onStart: function(e, target){
+				startTarget = target;
+				clearTimeout(startTimer);
+				startTimer = setTimeout(function(){
+					addClass(target, 'selected');
+				}, 100);
+			},
+			onMove: function(e, target){
+				clearTimeout(startTimer);
+				removeClass(startTarget, 'selected');
+			},
+			onEnd: function(e, target){
+				clearTimeout(startTimer);
+				setTimeout(function(){
+					removeClass(startTarget, 'selected');
+				}, 2000);
+			},
+			onTap: function(){
+				$hide(seasonsButton);
+				var seasonsDiv = page.seasons;
+				addClass(startTarget, 'selected');
+				setTimeout(function(){
+					removeClass(seasonsDiv, 'in');
+					addClass(seasonsDiv, 'slideup out reverse');
+					setTimeout(function(){
+						$show(seasonsButton);
+						removeClass(startTarget, 'selected');
+					}, 350);
+				}, 600);
 			}
-			selectedIndex = index;
-			var option = seasonsSelect.options[index],
-				text = option.text.split(' '),
-				year = parseInt(text[1], 10),
-				season = text[0].toLowerCase();
-			location.hash = 'animes-' + year + '-' + season;
-		}, false);
-		// Somehow this focus blur prevents the list from 'jumping' a little
-		seasonsSelect.focus();
-		seasonsSelect.blur();
+		});
+		
+		$show(seasonsButton);
+		tappable(seasonsButton, {
+			noScroll: true,
+			onTap: function(){
+				var seasonsDiv = page.seasons;
+				$show(seasonsDiv);
+				removeClass(seasonsDiv, 'out');
+				removeClass(seasonsDiv, 'reverse');
+				addClass(seasonsDiv, 'slideup in');
+			}
+		});
+		
+		tappable(closeSeasonsButton, {
+			noScroll: true,
+			onTap: function(){
+				$hide(seasonsButton);
+				var seasonsDiv = page.seasons;
+				removeClass(seasonsDiv, 'in');
+				addClass(seasonsDiv, 'slideup out reverse');
+				setTimeout(function(){
+					$show(seasonsButton);
+				}, 350);
+			}
+		});
+		
 		loadPage();
 	});
 	
@@ -266,15 +336,18 @@
 		if (tagName == 'img'){
 			var imageDiv = page.image;
 			$show(imageDiv);
-			imageDiv.className = 'page slideup in';
+			removeClass(imageDiv, 'slideup');
+			removeClass(imageDiv, 'out');
+			removeClass(imageDiv, 'reverse');
+			addClass(imageDiv, 'slideup in');
 			
 			var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
 				div = imageDiv.querySelector('.scroll div'),
 				img = new Image(),
-				src = anime.image,
+				src = 'http://src.sencha.io/' + anime.image,
 				p = d.createElement('p');
 			img.onload = function(){
-				img.className = '';
+				removeClass(img, 'loading');
 				setTimeout(function(){
 					scroll.image.refresh();
 				}, 100);
@@ -284,7 +357,7 @@
 			};
 			img.src = src;
 			img.alt = '';
-			img.className = 'loading';
+			addClass(img, 'loading');
 			p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
 			div.appendChild(img);
 			div.appendChild(p);
@@ -295,12 +368,13 @@
 	tappable(closeImageButton, {
 		noScroll: true,
 		onTap: function(){
-			$hide(seasonsSelect);
+			$hide(seasonsButton);
 			var imageDiv = page.image;
-			imageDiv.className = 'page slideup out reverse';
+			removeClass(imageDiv, 'in');
+			addClass(imageDiv, 'out reverse');
 			setTimeout(function(){
 				imageDiv.querySelector('.scroll div').innerHTML = '';
-				$show(seasonsSelect);
+				$show(seasonsButton);
 			}, 350);
 		}
 	});
