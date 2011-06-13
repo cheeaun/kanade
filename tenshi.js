@@ -43,6 +43,7 @@
 		animesDiv = $('animes'),
 		countDiv = $('count'),
 		imageDiv = $('image'),
+		loading = $('loading'),
 		page = {},
 		scroll = {},
 		pages = d.querySelectorAll('.page'),
@@ -74,7 +75,7 @@
 				animesLeft = [],
 				end = function(){
 					if (j>=l){
-						removeClass(container, 'loading');
+						$hide(loading);
 						$show(seasonsButton);
 						$data.sort(function(a, b){
 							return b.score - a.score;
@@ -133,7 +134,7 @@
 			$hide(seasonsButton);
 			$show(animesDiv);
 			countDiv.innerHTML = '';
-			addClass(container, 'loading');
+			$show(loading);
 			animesDiv.innerHTML = '';
 			$data = [];
 			
@@ -185,7 +186,7 @@
 			$show(seasonsButton);
 			$hide(animesDiv);
 			countDiv.innerHTML = '';
-			removeClass(container, 'loading');
+			$hide(loading);
 			scroll.home.refresh();
 			heading.innerHTML = 'Kanade';
 		}
@@ -216,10 +217,6 @@
 		setTimeout(adjustHeight, 1000); // fail-safeness
 		d.addEventListener('touchend', $top, false);
 		w.addEventListener('orientationchange', adjustHeight, false);
-		
-		container.addEventListener('touchstart', function(e){
-			if (container.className.indexOf('loading') != -1) e.preventDefault();
-		}, false);
 	}
 	
 	microAjax('seasons.json', function(r){

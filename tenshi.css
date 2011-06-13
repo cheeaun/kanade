@@ -16,6 +16,10 @@ body{
 	left: 0;
 	width: 100%;
 }
+#page-seasons,
+#page-image{
+	z-index: 200;
+}
 #seasons-container{
 	background-color: #cbd2d8;
 	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
@@ -102,7 +106,7 @@ header h1{
 	background-image: -o-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
 	background-image: linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
 }
-.loading{
+img.loading{
 	background: transparent url(loading.gif) center no-repeat;
 }
 .scroll{
@@ -311,6 +315,64 @@ header h1{
 #image p{
 	margin: 0;
 	padding: 0 10px 10px;
+}
+
+#loading{
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	height: 16px;
+	line-height: 16px;
+	margin-top: -8px;
+	color: #444;
+	text-shadow: 0 -1px rgba(255,255,255,.5);
+	text-align: center;
+	pointer-events: none;
+	z-index: 100;
+	font-weight: bold;
+	font-size: 14px;
+	opacity: .7;
+}
+
+#loading .loader{
+	margin-right: 5px;
+	vertical-align: top;
+}
+
+.loader{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: transparent url(loader-sprite.png) no-repeat;
+	-webkit-animation: 'loading-sprite' 1s linear infinite;
+}
+@-webkit-keyframes 'loading-sprite' {
+	0% { background-position: 0 0; }
+	8.32% { background-position: 0 0; }
+	8.33% { background-position: -16px 0; }
+	16.66% { background-position: -16px 0; }
+	16.67% { background-position: -32px 0; }
+	24.99% { background-position: -32px 0; }
+	25% { background-position: -48px 0; }
+	33.32% { background-position: -48px 0; }
+	33.33% { background-position: -64px 0; }
+	41.66% { background-position: -64px 0; }
+	41.67% { background-position: -80px 0; }
+	49.99% { background-position: -80px 0; }
+	50% { background-position: -96px 0; }
+	58.32% { background-position: -96px 0; }
+	58.33% { background-position: -112px 0; }
+	66.66% { background-position: -112px 0; }
+	66.67% { background-position: -128px 0; }
+	74.99% { background-position: -128px 0; }
+	75% { background-position: -144px 0; }
+	83.32% { background-position: -144px 0; }
+	83.33% { background-position: -160px 0; }
+	91.66% { background-position: -160px 0; }
+	91.67% { background-position: -176px 0; }
+	99.99% { background-position: -176px 0; }
+	100% { background-position: -192px 0; }
 }
 
 /* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
