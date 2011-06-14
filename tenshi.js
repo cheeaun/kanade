@@ -300,68 +300,72 @@
 		loadPage();
 	});
 	
-	if ($touch){
-		animesDiv.addEventListener('touchstart', function(e){
-			var el = e.target,
-				tagName = el.tagName;
-			if (!tagName) return;
-			tagName = tagName.toLowerCase();
-			if (tagName == 'img'){
-				el.style.opacity = .7;
-				el.parentNode.style.backgroundColor = '#000';
-			}
-		}, false);
-		var revert = function(e){
-			var el = e.target,
+	var imageTarget,
+		noTap = false;
+		revert = function(){
+			var el = imageTarget,
 			tagName = el.tagName;
-			if (!tagName) return;
 			tagName = tagName.toLowerCase();
 			if (tagName == 'img'){
 				el.style.opacity = 1;
 				el.parentNode.style.backgroundColor = '';
 			}
-		};
-		animesDiv.addEventListener('touchmove', revert, false);
-		animesDiv.addEventListener('touchend', revert, false);
-	}
-	// the click event is specially modified by iScroll. Nice.
-	animesDiv.addEventListener('click', function(e){
-		var el = e.target,
-			tagName = el.tagName;
-		if (!tagName) return;
-		tagName = tagName.toLowerCase();
-		if (tagName == 'img'){
-			var imageDiv = page.image;
-			$show(imageDiv);
-			removeClass(imageDiv, 'slideup');
-			removeClass(imageDiv, 'out');
-			removeClass(imageDiv, 'reverse');
-			addClass(imageDiv, 'slideup in');
-			
-			var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
-				div = imageDiv.querySelector('.scroll div'),
-				img = new Image(),
-				src = 'http://src.sencha.io/' + anime.image,
-				p = d.createElement('p');
-			img.onload = function(){
-				removeClass(img, 'loading');
-				setTimeout(function(){
-					scroll.image.refresh();
-				}, 100);
-			};
-			img.onabort = img.onerror = function(){
-				img.src = src + '?' + (+new Date());
-			};
-			img.src = src;
-			img.alt = '';
-			addClass(img, 'loading');
-			p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
-			div.appendChild(img);
-			div.appendChild(p);
-			
-			scroll.image.refresh();
 		}
-	}, false);
+	tappable(animesDiv, {
+		activeClass: null,
+		onStart: function(e, target){
+			var el = target,
+				tagName = el.tagName;
+			imageTarget = el;
+			tagName = tagName.toLowerCase();
+			if (tagName == 'img'){
+				el.style.opacity = .6;
+				el.parentNode.style.backgroundColor = '#000';
+			}
+		},
+		onMove: revert,
+		onEnd: revert,
+		onTap: function(e, target){
+			var el = target,
+				tagName = el.tagName;
+			tagName = tagName.toLowerCase();
+			if (tagName == 'img'){
+				if (noTap) return;
+				noTap = true;
+				setTimeout(function(){ noTap = false; }, 1000);
+				var imageDiv = page.image;
+				$show(imageDiv);
+				removeClass(imageDiv, 'slideup');
+				removeClass(imageDiv, 'out');
+				removeClass(imageDiv, 'reverse');
+				addClass(imageDiv, 'slideup in');
+				
+				var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
+					div = imageDiv.querySelector('.scroll div'),
+					img = new Image(),
+					src = 'http://src.sencha.io/' + anime.image,
+					p = d.createElement('p');
+				img.onload = function(){
+					removeClass(img, 'loading');
+					setTimeout(function(){
+						scroll.image.refresh();
+					}, 100);
+				};
+				img.onabort = img.onerror = function(){
+					img.src = src + '?' + (+new Date());
+				};
+				img.src = src;
+				img.alt = '';
+				addClass(img, 'loading');
+				p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
+				div.appendChild(img);
+				div.appendChild(p);
+				
+				scroll.image.refresh();
+			}
+		}
+	});
+	
 	tappable(closeImageButton, {
 		noScroll: true,
 		onTap: function(){
