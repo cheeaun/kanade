@@ -3,7 +3,7 @@
 		malAnime = 'http://myanimelist.net/anime/',
 		animeItemTmpl = '<li id="anime-{id}">'
 			+ '<div class="img"><img src="{image}" width="50" height="70" alt=""></div>'
-			+ '<h2><a href="{url}" target="_blank">{title}</a></h2>'
+			+ '<a href="{url}" target="_blank">{title}</a>'
 			+ '<span class="score {scoreColor}">{score}</span> '
 			+ '<span class="episodes">{episodes} episodes</span>'
 			+ '<div class="genres">{genres}</div>'

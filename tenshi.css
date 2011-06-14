@@ -142,20 +142,18 @@ img.loading{
 	border-top: 1px solid #e0e0e0;
 	margin-top: -1px;
 }
-.animes-list h2{
+.animes-list a{
+	display: block;
 	font-size: 100%;
+	font-weight: bold;
 	margin: 5px 5px 0 0;
 	padding: 0;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	color: #1765CD;
-}
-.animes-list a{
 	text-decoration: none;
 	color: #2571d8;
 }
-.animes-list h2.active a,
 .animes-list a.active{
 	background-color: #bbceff;
 }
@@ -167,6 +165,9 @@ img.loading{
 }
 .animes-list .img img{
 	cursor: pointer;
+}
+.animes-list span{
+	pointer-events: none;
 }
 .animes-list .score{
 	float: right;
@@ -203,7 +204,6 @@ img.loading{
 	padding: 10px;
 	color: #5b6c84;
 	text-align: center;
-	text-shadow: 0 1px #fff;
 }
 #seasons-container{
 	background-color: #efefef;
