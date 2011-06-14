@@ -76,7 +76,6 @@
 				end = function(){
 					if (j>=l){
 						$hide(loading);
-						$show(seasonsButton);
 						$data.sort(function(a, b){
 							return b.score - a.score;
 						});
@@ -131,7 +130,6 @@
 				};
 			
 			$hide(blankDiv);
-			$hide(seasonsButton);
 			$show(animesDiv);
 			countDiv.innerHTML = '';
 			$show(loading);
@@ -183,7 +181,6 @@
 				}) + ' ' + year;
 		} else {
 			$show(blankDiv);
-			$show(seasonsButton);
 			$hide(animesDiv);
 			countDiv.innerHTML = '';
 			$hide(loading);
@@ -258,21 +255,18 @@
 				}, 2000);
 			},
 			onTap: function(){
-				$hide(seasonsButton);
 				var seasonsDiv = page.seasons;
 				addClass(startTarget, 'selected');
 				setTimeout(function(){
 					removeClass(seasonsDiv, 'in');
 					addClass(seasonsDiv, 'slideup out reverse');
 					setTimeout(function(){
-						$show(seasonsButton);
 						removeClass(startTarget, 'selected');
 					}, 350);
 				}, 600);
 			}
 		});
 		
-		$show(seasonsButton);
 		tappable(seasonsButton, {
 			noScroll: true,
 			onTap: function(){
@@ -287,13 +281,9 @@
 		tappable(closeSeasonsButton, {
 			noScroll: true,
 			onTap: function(){
-				$hide(seasonsButton);
 				var seasonsDiv = page.seasons;
 				removeClass(seasonsDiv, 'in');
 				addClass(seasonsDiv, 'slideup out reverse');
-				setTimeout(function(){
-					$show(seasonsButton);
-				}, 350);
 			}
 		});
 		
@@ -369,13 +359,11 @@
 	tappable(closeImageButton, {
 		noScroll: true,
 		onTap: function(){
-			$hide(seasonsButton);
 			var imageDiv = page.image;
 			removeClass(imageDiv, 'in');
 			addClass(imageDiv, 'out reverse');
 			setTimeout(function(){
 				imageDiv.querySelector('.scroll div').innerHTML = '';
-				$show(seasonsButton);
 			}, 350);
 		}
 	});
