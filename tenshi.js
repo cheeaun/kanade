@@ -300,9 +300,12 @@
 			if (tagName == 'img'){
 				el.style.opacity = 1;
 				el.parentNode.style.backgroundColor = '';
+			} else if (tagName == 'a'){
+				removeClass(el, 'active');
 			}
 		}
 	tappable(animesDiv, {
+		allowClick: true,
 		activeClass: null,
 		onStart: function(e, target){
 			var el = target,
@@ -312,6 +315,8 @@
 			if (tagName == 'img'){
 				el.style.opacity = .6;
 				el.parentNode.style.backgroundColor = '#000';
+			} else if (tagName == 'a'){
+				addClass(el, 'active');
 			}
 		},
 		onMove: revert,

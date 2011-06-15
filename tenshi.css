@@ -136,7 +136,6 @@ img.loading{
 	display: block;
 	overflow: hidden;
 	border-bottom: 1px solid #e0e0e0;
-	line-height: 1.2em;
 }
 .animes-list li:first-child{
 	border-top: 1px solid #e0e0e0;
@@ -153,9 +152,10 @@ img.loading{
 	overflow: hidden;
 	text-decoration: none;
 	color: #2571d8;
+	line-height: 1.2em;
 }
 .animes-list a.active{
-	background-color: #bbceff;
+	background-color: #eff4fc;
 }
 .animes-list .img{
 	float: left;
