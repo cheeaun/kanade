@@ -267,6 +267,7 @@
 			}
 		});
 		
+		$show(seasonsButton);
 		tappable(seasonsButton, {
 			noScroll: true,
 			onTap: function(){
