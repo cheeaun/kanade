@@ -134,6 +134,7 @@
 			countDiv.innerHTML = '';
 			$show(loading);
 			animesDiv.innerHTML = '';
+			scroll.home.refresh();
 			$data = [];
 			
 			$top();
