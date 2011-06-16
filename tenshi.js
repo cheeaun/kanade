@@ -2,7 +2,7 @@
 	var apiAnime = 'http://kanade-api.appspot.com/v1/anime',
 		malAnime = 'http://myanimelist.net/anime/',
 		animeItemTmpl = '<li id="anime-{id}">'
-			+ '<div class="img"><img src="{image}" width="50" height="70" alt=""></div>'
+			+ '<div class="img"><img src="{image}" width="50" height="70" alt="" onerror="this.src = this.src+\'?\'+(+new Date())"></div>'
 			+ '<a href="{url}" target="_blank">{title}</a>'
 			+ '<span class="score {scoreColor}">{score}</span> '
 			+ '<span class="episodes">{episodes} episodes</span>'
