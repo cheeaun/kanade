@@ -160,9 +160,14 @@
 		var p = pages[i],
 			id = p.id.replace('page-', '');
 		page[id] = p;
-		var s = p.querySelector('.scroll');
+		var s = p.querySelector('.scroll'),
+			isImage = (id == 'image');
 		scroll[id] = $ios ? new iScroll(s, {
-			hScroll: false
+			hScroll: isImage,
+			hScrollbar: !isImage,
+			vScrollbar: !isImage,
+			zoom: isImage,
+			lockDirection: !isImage
 		}) : {refresh: noop, scrollTo: noop};
 	}
 	
@@ -340,10 +345,11 @@
 				var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
 					div = imageDiv.querySelector('.scroll div'),
 					img = new Image(),
-					src = 'http://src.sencha.io/' + anime.image,
+					src = anime.image.replace('.jpg', 'l.jpg'),
 					p = d.createElement('p');
 				img.onload = function(){
 					removeClass(img, 'loading');
+					div.style.width = Math.max(window.innerWidth, img.offsetWidth+20) + 'px';
 					setTimeout(function(){
 						scroll.image.refresh();
 					}, 100);
@@ -358,6 +364,9 @@
 				div.appendChild(img);
 				div.appendChild(p);
 				
+				div.style.width = '';
+				scroll.image.scrollTo(0,0);
+				scroll.image.zoom(0,0,1);
 				scroll.image.refresh();
 			}
 		}

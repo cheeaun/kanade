@@ -114,6 +114,8 @@ img.loading{
 	top: 44px;
 	left: 0;
 	width: 100%;
+	-webkit-box-sizing: padding-box;
+	box-sizing: padding-box;
 }
 .list-pad{
 	padding: 9px;
@@ -301,11 +303,19 @@ img.loading{
 	color: #666;
 	text-shadow: 0 1px #fff;
 }
+#image>div{
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#image>div *{
+	pointer-events: none;
+}
 #image img{
 	background-color: #fff;
 	min-width: 200px;
 	min-height: 200px;
-	margin: 10px 10px 5px;
+	margin: 0 0 5px;
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
 	-moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
 	-ms-box-shadow: 0 0 10px rgba(0,0,0,.5);
