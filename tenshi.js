@@ -88,7 +88,7 @@
 							html += $sub(animeItemTmpl, {
 								id: id,
 								url: malAnime + id,
-								image: 'http://src.sencha.io/' + o.image.replace('.jpg', 't.jpg'),
+								image: 'http://src.sencha.io/100/' + o.image,
 								title: o.title,
 								score: score.toFixed(2) || '?',
 								scoreColor: score == 10 ? 'mad' : score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
