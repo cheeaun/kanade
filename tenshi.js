@@ -68,6 +68,7 @@
 		removeClass = function(el, className){
 			el.className = el.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
 		},
+		thumbSize = Math.round(50 * (window.devicePixelRatio || 1)),
 		loadAnimes = function(year, season){
 			var animes = $seasons[year][season],
 				i = 0, j = 0,
@@ -88,7 +89,7 @@
 							html += $sub(animeItemTmpl, {
 								id: id,
 								url: malAnime + id,
-								image: 'http://src.sencha.io/100/' + o.image,
+								image: 'http://src.sencha.io/' + thumbSize + '/' + o.image,
 								title: o.title,
 								score: score.toFixed(2) || '?',
 								scoreColor: score == 10 ? 'mad' : score >= 8 ? 'good' : score >= 6 ? 'ok' : '',
