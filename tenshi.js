@@ -43,6 +43,7 @@
 		animesDiv = $('animes'),
 		countDiv = $('count'),
 		imageDiv = $('image'),
+		imageCaption = $('image-caption');
 		loading = $('loading'),
 		page = {},
 		scroll = {},
@@ -61,12 +62,18 @@
 		clean = function(str){
 			return str.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
 		},
+		hasClass = function(el, className){
+			return clean(el.className).indexOf(className) > -1;
+		},
 		addClass = function(el, className){
-			if (clean(el.className).indexOf(className) > -1) return;
+			if (hasClass(el, className)) return;
 			el.className = clean(el.className + ' ' + className);
 		},
 		removeClass = function(el, className){
 			el.className = el.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
+		},
+		toggleClass = function(el, className){
+			hasClass(el, className) ? removeClass(el, className) : addClass(el, className);
 		},
 		thumbSize = Math.round(50 * (window.devicePixelRatio || 1)),
 		loadAnimes = function(year, season){
@@ -159,17 +166,50 @@
 	
 	for (var i=0, l=pages.length; i<l; i++){
 		var p = pages[i],
-			id = p.id.replace('page-', '');
+			id = p.id.replace('page-', ''),
+			s = p.querySelector('.scroll'),
+			options = {};
 		page[id] = p;
-		var s = p.querySelector('.scroll'),
-			isImage = (id == 'image');
-		scroll[id] = $ios ? new iScroll(s, {
-			hScroll: isImage,
-			hScrollbar: !isImage,
-			vScrollbar: !isImage,
-			zoom: isImage,
-			lockDirection: !isImage
-		}) : {refresh: noop, scrollTo: noop};
+		switch (id){
+			case 'image':
+				var header = p.querySelector('header'),
+					scrolled = false,
+					zoomed = false;
+				options = {
+					hScroll: true,
+					hScrollbar: false,
+					vScrollbar: false,
+					zoom: true,
+					lockDirection: false,
+					onScrollMove: function(){
+						if (!scrolled){
+							removeClass(header, 'visible');
+							removeClass(imageCaption, 'visible');
+						}
+						scrolled = true;
+					},
+					onZoom: function(){
+						if (!zoomed){
+							removeClass(header, 'visible');
+							removeClass(imageCaption, 'visible');
+						}
+						zoomed = true;
+					},
+					onTouchEnd: function(){
+						if (!scrolled){
+							toggleClass(header, 'visible');
+							toggleClass(imageCaption, 'visible');
+						}
+						scrolled = zoomed = false;
+					}
+				}
+				break;
+			default:
+				options = {
+					hScroll: false
+				}
+		}
+		scroll[id] = $ios ? new iScroll(s, options) : {refresh: noop, scrollTo: noop};
 	}
 	
 	var loadPage = function(){
@@ -210,7 +250,8 @@
 						var p = page[id],
 							s = p.querySelector('.scroll');
 						p.style.height = height + 'px';
-						s.style.height = s.firstElementChild.style.minHeight = (height - offsetTop) + 'px';
+						var minHeight = (id == 'image') ? height : height-offsetTop;
+						s.style.height = s.firstElementChild.style.minHeight = minHeight + 'px';
 					}
 					for (var id in scroll){
 						scroll[id].refresh();
@@ -350,7 +391,7 @@
 					p = d.createElement('p');
 				img.onload = function(){
 					removeClass(img, 'loading');
-					div.style.width = Math.max(window.innerWidth, img.offsetWidth+20) + 'px';
+					div.style.width = Math.max(window.innerWidth, img.offsetWidth) + 'px';
 					setTimeout(function(){
 						scroll.image.refresh();
 					}, 100);
@@ -361,9 +402,10 @@
 				img.src = src;
 				img.alt = '';
 				addClass(img, 'loading');
-				p.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
+				imageCaption.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
+				addClass(imageDiv.querySelector('header'), 'visible');
+				addClass(imageCaption, 'visible');
 				div.appendChild(img);
-				div.appendChild(p);
 				
 				div.style.width = '';
 				scroll.image.scrollTo(0,0);

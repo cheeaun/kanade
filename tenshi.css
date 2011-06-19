@@ -106,6 +106,48 @@ header h1{
 	background-image: -o-linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
 	background-image: linear-gradient(top, #7d88a5, #3a4e78 50%, #253c6a 51%, #273f6d);
 }
+#page-image{
+	background-color: #000;
+}
+#page-image header{
+	background-color: transparent;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(106,106,106,.7)), color-stop(0.5, rgba(45,45,45,.7)), color-stop(0.51, rgba(0,0,0,.7)), to(rgba(0,0,0,.7))); 
+	background-image: -webkit-linear-gradient(top, rgba(106,106,106,.7), rgba(45,45,45,.7) 50%, rgba(0,0,0,.7) 51%, rgba(0,0,0,.7));
+	background-image: -moz-linear-gradient(top, rgba(106,106,106,.7), rgba(45,45,45,.7) 50%, rgba(0,0,0,.7) 51%, rgba(0,0,0,.7));
+	background-image: -ms-linear-gradient(top, rgba(106,106,106,.7), rgba(45,45,45,.7) 50%, rgba(0,0,0,.7) 51%, rgba(0,0,0,.7));
+	background-image: -o-linear-gradient(top, rgba(106,106,106,.7), rgba(45,45,45,.7) 50%, rgba(0,0,0,.7) 51%, rgba(0,0,0,.7));
+	background-image: linear-gradient(top, rgba(106,106,106,.7), rgba(45,45,45,.7) 50%, rgba(0,0,0,.7) 51%, rgba(0,0,0,.7));
+	border-top: 1px solid rgba(138,138,138,.7);
+	border-bottom: 1px solid rgba(28,28,28,.88);
+	z-index: 1;
+	opacity: 0;
+	-webkit-transition: opacity .5s;
+}
+#page-image header.visible{
+	opacity: 1;
+}
+#page-image .header-button{
+	background-color: #000;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#707070), color-stop(.5, #303030), color-stop(.51, #000), to(#000));
+	background-image: -webkit-linear-gradient(top, #707070, #303030 50%, #000 51%, #000);
+	background-image: -moz-linear-gradient(top, #707070, #303030 50%, #000 51%, #000);
+	background-image: -ms-linear-gradient(top, #707070, #303030 50%, #000 51%, #000);
+	background-image: -o-linear-gradient(top, #707070, #303030 50%, #000 51%, #000);
+	background-image: linear-gradient(top, #707070, #303030 50%, #000 51%, #000);
+	border-top-color: #191919;
+	border-bottom-color: #000;
+}
+#page-image .header-button.tappable-active{
+	background-color: #303030;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#838383), color-stop(.5, #444), color-stop(.51, #303030), to(#333));
+	background-image: -webkit-linear-gradient(top, #838383, #444 50%, #303030 51%, #333);
+	background-image: -moz-linear-gradient(top, #838383, #444 50%, #303030 51%, #333);
+	background-image: -ms-linear-gradient(top, #838383, #444 50%, #303030 51%, #333);
+	background-image: -o-linear-gradient(top, #838383, #444 50%, #303030 51%, #333);
+	background-image: linear-gradient(top, #838383, #444 50%, #303030 51%, #333);
+	border-top-color: #242424;
+	border-bottom-color: #262626;
+}
 img.loading{
 	background: transparent url(loading.gif) center no-repeat;
 }
@@ -114,8 +156,9 @@ img.loading{
 	top: 44px;
 	left: 0;
 	width: 100%;
-	-webkit-box-sizing: padding-box;
-	box-sizing: padding-box;
+}
+#page-image .scroll{
+	top: 0;
 }
 .list-pad{
 	padding: 9px;
@@ -298,33 +341,45 @@ img.loading{
 	background-color: #fff;
 }
 #image{
-	background-color: #efefef;
 	text-align: center;
-	color: #666;
-	text-shadow: 0 1px #fff;
+	color: #fff;
 }
 #image>div{
-	padding: 10px;
+	padding: 0;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
 }
 #image>div *{
 	pointer-events: none;
 }
 #image img{
-	background-color: #fff;
 	min-width: 200px;
 	min-height: 200px;
-	margin: 0 0 5px;
-	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
-	-moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
-	-ms-box-shadow: 0 0 10px rgba(0,0,0,.5);
-	-o-box-shadow: 0 0 10px rgba(0,0,0,.5);
-	box-shadow: 0 0 10px rgba(0,0,0,.5);
 }
-#image p{
-	margin: 0;
-	padding: 0 10px 10px;
+#image-caption{
+	pointer-events: none;
+	opacity: 0;
+	background-color: rgba(0,0,0,.6);
+	border-top: 1px solid #000;
+	color: #fff;
+	padding: 5px;
+	font-size: 14px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+	-webkit-transition: opacity .5s;
+	text-shadow: 0 -1px #000;
+}
+#image-caption.visible{
+	opacity: 1;
 }
 
 #loading{
@@ -529,6 +584,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 		height: 23px;
 		line-height: 23px;
 		font-size: 11px;
+	}
+	#image>div{
+		padding-top: 34px;
 	}
 	#close-image{
 		line-height: 22px;
