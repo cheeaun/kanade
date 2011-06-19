@@ -324,6 +324,8 @@
 				removeClass(seasonsDiv, 'out');
 				removeClass(seasonsDiv, 'reverse');
 				addClass(seasonsDiv, 'slideup in');
+				var checkedEl = seasonsDiv.querySelector('.checked');
+				if (checkedEl) scroll.seasons.scrollToElement(checkedEl);
 			}
 		});
 		
