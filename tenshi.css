@@ -211,6 +211,12 @@ img.loading{
 .animes-list .img img{
 	cursor: pointer;
 }
+.animes-list .img.selected{
+	background-color: #000;
+}
+.animes-list .img.selected img{
+	opacity: .6;
+}
 .animes-list span{
 	pointer-events: none;
 }

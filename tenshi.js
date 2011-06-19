@@ -171,6 +171,130 @@
 			options = {};
 		page[id] = p;
 		switch (id){
+			case 'home':
+				var imageTarget, linkTarget,
+					scrolled = false,
+					revert = function(){
+						if (imageTarget){
+							removeClass(imageTarget.parentNode, 'selected');
+							imageTarget = null;
+						}
+						if (linkTarget){
+							removeClass(linkTarget, 'active');
+							linkTarget = null;
+						}
+					};
+				options = {
+					hScroll: false,
+					onBeforeScrollStart: function(e){
+						e.preventDefault();
+						var target = e.target;
+						while (target.nodeType != 1) target = target.parentNode;
+						var tagName = target.tagName.toLowerCase();
+						if (tagName == 'img'){
+							var parent = target.parentNode;
+							if (hasClass(parent, 'selected')) return;
+							imageTarget = target;
+							addClass(parent, 'selected');
+						} else if (tagName == 'a'){
+							linkTarget = target;
+							addClass(target, 'active');
+						}
+					},
+					onBeforeScrollMove: function(){
+						scrolled = true;
+						revert();
+					},
+					onScrollEnd: function(){
+						scrolled = false;
+					},
+					onTouchEnd: function(){
+						if (imageTarget){
+							var el = imageTarget,
+								imageDiv = page.image;
+							$show(imageDiv);
+							removeClass(imageDiv, 'slideup');
+							removeClass(imageDiv, 'out');
+							removeClass(imageDiv, 'reverse');
+							addClass(imageDiv, 'slideup in');
+							
+							var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
+								div = imageDiv.querySelector('.scroll div'),
+								img = new Image(),
+								src = anime.image.replace('.jpg', 'l.jpg'),
+								p = d.createElement('p');
+							img.onload = function(){
+								removeClass(img, 'loading');
+								div.style.width = Math.max(window.innerWidth, img.offsetWidth) + 'px';
+								setTimeout(function(){
+									scroll.image.refresh();
+								}, 100);
+							};
+							img.onabort = img.onerror = function(){
+								img.src = src + '?' + (+new Date());
+							};
+							img.src = src;
+							img.alt = '';
+							addClass(img, 'loading');
+							imageCaption.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
+							addClass(imageDiv.querySelector('header'), 'visible');
+							addClass(imageCaption, 'visible');
+							div.appendChild(img);
+							
+							div.style.width = '';
+							scroll.image.scrollTo(0,0);
+							scroll.image.zoom(0,0,1);
+							scroll.image.refresh();
+						}
+						setTimeout(revert, 350);
+					}
+				};
+				break;
+			case 'seasons':
+				var startTarget, startTimer, scrolled = false;
+				options = {
+					hScroll: false,
+					onBeforeScrollStart: function(e){
+						e.preventDefault();
+						var target = e.target;
+						while (target.nodeType != 1) target = target.parentNode;
+						if (target.tagName.toLowerCase() != 'a') return;
+						startTarget = target;
+						clearTimeout(startTimer);
+						startTimer = setTimeout(function(){
+							addClass(startTarget, 'selected');
+						}, 80);
+					},
+					onBeforeScrollMove: function(){
+						if (!startTarget) return;
+						scrolled = true;
+						clearTimeout(startTimer);
+						removeClass(startTarget, 'selected');
+					},
+					onScrollEnd: function(){
+						scrolled = false;
+					},
+					onTouchEnd: function(){
+						if (!startTarget) return;
+						if (scrolled){
+							clearTimeout(startTimer);
+							setTimeout(function(){
+								removeClass(startTarget, 'selected');
+							}, 2000);
+						} else {
+							var seasonsDiv = page.seasons;
+							addClass(startTarget, 'selected');
+							setTimeout(function(){
+								removeClass(seasonsDiv, 'in');
+								addClass(seasonsDiv, 'slideup out reverse');
+								setTimeout(function(){
+									removeClass(startTarget, 'selected');
+								}, 350);
+							}, 600);
+						}
+					}
+				};
+				break;
 			case 'image':
 				var header = p.querySelector('header'),
 					scrolled = false,
@@ -202,12 +326,12 @@
 						}
 						scrolled = zoomed = false;
 					}
-				}
+				};
 				break;
 			default:
 				options = {
 					hScroll: false
-				}
+				};
 		}
 		scroll[id] = $ios ? new iScroll(s, options) : {refresh: noop, scrollTo: noop};
 	}
@@ -281,40 +405,6 @@
 		seasonsList.innerHTML += seasonsHTML;
 		scroll.seasons.refresh();
 		
-		var startTarget, startTimer;
-		tappable(seasonsList, {
-			activeClass: null,
-			allowClick: true,
-			onStart: function(e, target){
-				startTarget = target;
-				clearTimeout(startTimer);
-				startTimer = setTimeout(function(){
-					addClass(target, 'selected');
-				}, 100);
-			},
-			onMove: function(e, target){
-				clearTimeout(startTimer);
-				removeClass(startTarget, 'selected');
-			},
-			onEnd: function(e, target){
-				clearTimeout(startTimer);
-				setTimeout(function(){
-					removeClass(startTarget, 'selected');
-				}, 2000);
-			},
-			onTap: function(){
-				var seasonsDiv = page.seasons;
-				addClass(startTarget, 'selected');
-				setTimeout(function(){
-					removeClass(seasonsDiv, 'in');
-					addClass(seasonsDiv, 'slideup out reverse');
-					setTimeout(function(){
-						removeClass(startTarget, 'selected');
-					}, 350);
-				}, 600);
-			}
-		});
-		
 		$show(seasonsButton);
 		tappable(seasonsButton, {
 			noScroll: true,
@@ -339,82 +429,6 @@
 		});
 		
 		loadPage();
-	});
-	
-	var imageTarget,
-		noTap = false;
-		revert = function(){
-			var el = imageTarget,
-			tagName = el.tagName;
-			tagName = tagName.toLowerCase();
-			if (tagName == 'img'){
-				el.style.opacity = 1;
-				el.parentNode.style.backgroundColor = '';
-			} else if (tagName == 'a'){
-				removeClass(el, 'active');
-			}
-		}
-	tappable(animesDiv, {
-		allowClick: true,
-		activeClass: null,
-		onStart: function(e, target){
-			var el = target,
-				tagName = el.tagName;
-			imageTarget = el;
-			tagName = tagName.toLowerCase();
-			if (tagName == 'img'){
-				el.style.opacity = .6;
-				el.parentNode.style.backgroundColor = '#000';
-			} else if (tagName == 'a'){
-				addClass(el, 'active');
-			}
-		},
-		onMove: revert,
-		onEnd: revert,
-		onTap: function(e, target){
-			var el = target,
-				tagName = el.tagName;
-			tagName = tagName.toLowerCase();
-			if (tagName == 'img'){
-				if (noTap) return;
-				noTap = true;
-				setTimeout(function(){ noTap = false; }, 1000);
-				var imageDiv = page.image;
-				$show(imageDiv);
-				removeClass(imageDiv, 'slideup');
-				removeClass(imageDiv, 'out');
-				removeClass(imageDiv, 'reverse');
-				addClass(imageDiv, 'slideup in');
-				
-				var anime = $cache.get(el.parentNode.parentNode.id.split('-')[1]) || {title: ''},
-					div = imageDiv.querySelector('.scroll div'),
-					img = new Image(),
-					src = anime.image.replace('.jpg', 'l.jpg'),
-					p = d.createElement('p');
-				img.onload = function(){
-					removeClass(img, 'loading');
-					div.style.width = Math.max(window.innerWidth, img.offsetWidth) + 'px';
-					setTimeout(function(){
-						scroll.image.refresh();
-					}, 100);
-				};
-				img.onabort = img.onerror = function(){
-					img.src = src + '?' + (+new Date());
-				};
-				img.src = src;
-				img.alt = '';
-				addClass(img, 'loading');
-				imageCaption.innerHTML = imageDiv.querySelector('h1').innerHTML = anime.title;
-				addClass(imageDiv.querySelector('header'), 'visible');
-				addClass(imageCaption, 'visible');
-				div.appendChild(img);
-				
-				div.style.width = '';
-				scroll.image.scrollTo(0,0);
-				scroll.image.zoom(0,0,1);
-				scroll.image.refresh();
-			}
-		}
 	});
 	
 	tappable(closeImageButton, {
