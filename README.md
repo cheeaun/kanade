@@ -15,6 +15,7 @@ Kanade is primarily optimized for Mobile Safari though it may work on other mobi
 - [microajax](http://code.google.com/p/microajax/)
 - [iScroll](https://github.com/cubiq/iscroll)
 - [Kizzy](https://github.com/ded/Kizzy)
+- [tappable](https://github.com/cheeaun/tappable)
 
 Contributing
 ------------
