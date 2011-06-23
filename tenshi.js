@@ -225,7 +225,7 @@
 								p = d.createElement('p');
 							img.onload = function(){
 								removeClass(img, 'loading');
-								div.style.width = Math.max(window.innerWidth, img.offsetWidth) + 'px';
+								div.style.minWidth = Math.max(window.innerWidth, img.offsetWidth) + 'px';
 								setTimeout(function(){
 									scroll.image.refresh();
 								}, 100);

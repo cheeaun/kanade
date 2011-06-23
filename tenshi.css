@@ -594,6 +594,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	#image>div{
 		padding-top: 34px;
 	}
+	#page-image #image>div{
+		padding-top: 0;
+	}
 	#close-image{
 		line-height: 22px;
 		height: 22px;
