@@ -85,7 +85,8 @@
 					if (j>=l){
 						$hide(loading);
 						$data.sort(function(a, b){
-							return b.score - a.score;
+							var score = b.score - a.score;
+							return (score != 0) ? score : (b.title < a.title);
 						});
 						var html = '';
 						for (var n=0; n<l; n++){
