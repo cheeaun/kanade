@@ -164,6 +164,14 @@ img.loading{
 	padding: 9px;
 	border-bottom: 9px solid rgba(0,0,0,0);
 }
+.list-pad p{
+	color: #4d576d;
+	text-shadow: 0 1px #fff;
+	text-align: center;
+	padding: 0;
+	margin: 9px;
+	font-size: 15px;
+}
 #blank{
 	padding: 20px;
 	color: #5b6c84;
