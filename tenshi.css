@@ -424,9 +424,65 @@ img.loading{
 	width: 16px;
 	height: 16px;
 	background: transparent url(loader-sprite.png) no-repeat;
-	-webkit-animation: 'loading-sprite' 1s linear infinite;
+	-webkit-animation: loading-sprite 1s linear infinite;
+	-moz-animation: loading-sprite 1s linear infinite;
+	animation: loading-sprite 1s linear infinite;
 }
-@-webkit-keyframes 'loading-sprite' {
+@-webkit-keyframes loading-sprite {
+	0% { background-position: 0 0; }
+	8.32% { background-position: 0 0; }
+	8.33% { background-position: -16px 0; }
+	16.66% { background-position: -16px 0; }
+	16.67% { background-position: -32px 0; }
+	24.99% { background-position: -32px 0; }
+	25% { background-position: -48px 0; }
+	33.32% { background-position: -48px 0; }
+	33.33% { background-position: -64px 0; }
+	41.66% { background-position: -64px 0; }
+	41.67% { background-position: -80px 0; }
+	49.99% { background-position: -80px 0; }
+	50% { background-position: -96px 0; }
+	58.32% { background-position: -96px 0; }
+	58.33% { background-position: -112px 0; }
+	66.66% { background-position: -112px 0; }
+	66.67% { background-position: -128px 0; }
+	74.99% { background-position: -128px 0; }
+	75% { background-position: -144px 0; }
+	83.32% { background-position: -144px 0; }
+	83.33% { background-position: -160px 0; }
+	91.66% { background-position: -160px 0; }
+	91.67% { background-position: -176px 0; }
+	99.99% { background-position: -176px 0; }
+	100% { background-position: -192px 0; }
+}
+@-moz-keyframes loading-sprite {
+	0% { background-position: 0 0; }
+	8.32% { background-position: 0 0; }
+	8.33% { background-position: -16px 0; }
+	16.66% { background-position: -16px 0; }
+	16.67% { background-position: -32px 0; }
+	24.99% { background-position: -32px 0; }
+	25% { background-position: -48px 0; }
+	33.32% { background-position: -48px 0; }
+	33.33% { background-position: -64px 0; }
+	41.66% { background-position: -64px 0; }
+	41.67% { background-position: -80px 0; }
+	49.99% { background-position: -80px 0; }
+	50% { background-position: -96px 0; }
+	58.32% { background-position: -96px 0; }
+	58.33% { background-position: -112px 0; }
+	66.66% { background-position: -112px 0; }
+	66.67% { background-position: -128px 0; }
+	74.99% { background-position: -128px 0; }
+	75% { background-position: -144px 0; }
+	83.32% { background-position: -144px 0; }
+	83.33% { background-position: -160px 0; }
+	91.66% { background-position: -160px 0; }
+	91.67% { background-position: -176px 0; }
+	99.99% { background-position: -176px 0; }
+	100% { background-position: -192px 0; }
+}
+@keyframes loading-sprite {
 	0% { background-position: 0 0; }
 	8.32% { background-position: 0 0; }
 	8.33% { background-position: -16px 0; }
@@ -460,69 +516,113 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .in, .out {
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-duration: 350ms;
+	animation-timing-function: ease-in-out;
+	animation-duration: 350ms;
 }
 
 .slide.in {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromright;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromright;
+	transform: translateX(0);
+	animation-name: slideinfromright;
 }
 
 .slide.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+	transform: translateX(-100%);
+	animation-name: slideouttoleft;
 }
 
 .slide.in.reverse {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromleft;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromleft;
+	transform: translateX(0);
+	animation-name: slideinfromleft;
 }
 
 .slide.out.reverse {
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+	transform: translateX(100%);
+	animation-name: slideouttoright;
 }
 
 .slideup.in {
 	-webkit-transform: translateY(0);
 	-webkit-animation-name: slideinfrombottom;
+	-moz-transform: translateY(0);
+	-moz-animation-name: slideinfrombottom;
+	transform: translateY(0);
+	animation-name: slideinfrombottom;
 	z-index: 10;
 }
 
 .slideup.out {
 	-webkit-animation-name: dontmove;
+	-moz-animation-name: dontmove;
+	animation-name: dontmove;
 	z-index: 0;
 }
 
 .slideup.out.reverse {
 	-webkit-transform: translateY(100%);
-	z-index: 10;
 	-webkit-animation-name: slideouttobottom;
+	-moz-transform: translateY(100%);
+	-moz-animation-name: slideouttobottom;
+	transform: translateY(100%);
+	animation-name: slideouttobottom;
+	z-index: 10;
 }
 
 .slideup.in.reverse {
-	z-index: 0;
 	-webkit-animation-name: dontmove;
+	-moz-animation-name: dontmove;
+	animation-name: dontmove;
+	z-index: 0;
 }
 .slidedown.in {
 	-webkit-transform: translateY(0);
 	-webkit-animation-name: slideinfromtop;
+	-moz-transform: translateY(0);
+	-moz-animation-name: slideinfromtop;
+	transform: translateY(0);
+	animation-name: slideinfromtop;
 	z-index: 10;
 }
 
 .slidedown.out {
 	-webkit-animation-name: dontmove;
+	-moz-animation-name: dontmove;
+	animation-name: dontmove;
 	z-index: 0;
 }
 
 .slidedown.out.reverse {
 	-webkit-transform: translateY(-100%);
-	z-index: 10;
 	-webkit-animation-name: slideouttotop;
+	-moz-transform: translateY(-100%);
+	-moz-animation-name: slideouttotop;
+	transform: translateY(-100%);
+	animation-name: slideouttotop;
+	z-index: 10;
 }
 
 .slidedown.in.reverse {
-	z-index: 0;
 	-webkit-animation-name: dontmove;
+	-moz-animation-name: dontmove;
+	animation-name: dontmove;
+	z-index: 0;
 }
 
 @-webkit-keyframes slideinfromright {
@@ -544,7 +644,6 @@ Built by David Kaneda and maintained by Jonathan Stark.
     from { -webkit-transform: translateX(0); }
     to { -webkit-transform: translateX(100%); }
 }
-
 
 @-webkit-keyframes slideinfromtop {
     from { -webkit-transform: translateY(-100%); }
@@ -571,6 +670,104 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 @-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@-moz-keyframes slideinfromright {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideinfromleft {
+    from { -moz-transform: translateX(-100%); }
+    to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideouttoleft {
+    from { -moz-transform: translateX(0); }
+    to { -moz-transform: translateX(-100%); }
+}
+
+@-moz-keyframes slideouttoright {
+    from { -moz-transform: translateX(0); }
+    to { -moz-transform: translateX(100%); }
+}
+
+@-moz-keyframes slideinfromtop {
+    from { -moz-transform: translateY(-100%); }
+    to { -moz-transform: translateY(0); }
+}
+
+@-moz-keyframes slideinfrombottom {
+    from { -moz-transform: translateY(100%); }
+    to { -moz-transform: translateY(0); }
+}
+
+@-moz-keyframes slideouttobottom {
+    from { -moz-transform: translateY(0); }
+    to { -moz-transform: translateY(100%); }
+}
+
+@-moz-keyframes slideouttotop {
+    from { -moz-transform: translateY(0); }
+    to { -moz-transform: translateY(-100%); }
+}
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideinfromright {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideinfromleft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideouttoleft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+@keyframes slideouttoright {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+
+@keyframes slideinfromtop {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideinfrombottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideouttobottom {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+}
+
+@keyframes slideouttotop {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeout {
     from { opacity: 1; }
     to { opacity: 0; }
 }
