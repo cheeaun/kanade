@@ -57,7 +57,7 @@
 		},
 		$show = function(el){
 			el.style.position = el.getAttribute('data-position') || '';
-			el.style.clip = '';
+			el.style.clip = 'auto';
 		},
 		clean = function(str){
 			return str.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
@@ -164,6 +164,8 @@
 			
 			if (animesLeft.length) req();
 		};
+	
+	if (!$touch) addClass(document.body, 'notouch');
 	
 	for (var i=0, l=pages.length; i<l; i++){
 		var p = pages[i],

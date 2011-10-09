@@ -18,9 +18,10 @@ body{
 }
 #page-seasons,
 #page-image{
+	clip: rect(0, 0, 0, 0);
 	z-index: 200;
 }
-#seasons-container{
+#page-seasons{
 	background-color: #cbd2d8;
 	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
 	background-image: -webkit-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
@@ -263,9 +264,6 @@ img.loading{
 	padding: 10px;
 	color: #5b6c84;
 	text-align: center;
-}
-#seasons-container{
-	background-color: #efefef;
 }
 #seasons-container>div{
 	overflow: hidden;
@@ -809,5 +807,47 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	}
 	.scroll{
 		top: 34px;
+	}
+}
+
+@media only screen and (min-width: 480px){
+	#page-seasons{
+		clip: auto;
+		width: 320px;
+		height: 100%;
+		bottom: 0;
+	}
+	#page-seasons header{
+	}
+	#close-seasons{
+		display: none;
+	}
+	#page-home{
+		left: 320px;
+		right: 0;
+		width: auto;
+	}
+	#loading .loader{
+		margin-left: 320px;
+	}
+	#seasons-button{
+		display: none !important;
+	}
+	.animes-list .img img{
+		cursor: auto;
+	}
+	#count{
+		display: none;
+	}
+	.notouch{
+		overflow: hidden;
+	}
+	.notouch .page{
+		overflow: hidden;
+		height: 100%;
+	}
+	.notouch .scroll{
+		overflow: auto;
+		bottom: 0;
 	}
 }
