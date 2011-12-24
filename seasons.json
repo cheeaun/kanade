@@ -67,8 +67,7 @@
 				"5226/Souten_Kouro",
 				"5984/Ristorante_Paradiso",
 				"5630/Higashi_no_Eden",
-				"5150/Hatsukoi_Limited",
-				"6114/Rainbow:_Nisha_Rokubou_no_Shichinin"
+				"5150/Hatsukoi_Limited"
 			],
 			
 			"summer": [
@@ -363,6 +362,36 @@
 				"11547/Sengoku☆Paradise_Kiwami",
 				"11457/Chibi☆Devi!"
 			]
+		},
+		
+		"2012": {
+			
+			"winter": [
+				"11319/Zero_no_Tsukaima_F",
+				"10790/Kore_wa_Zombie_Desu_ka_Jigokuhen",
+				"11597/Nisemonogatari",
+				"11665/Natsume_Yuujinchou_Shi",
+				"11617/Highschool_DxD",
+				"11179/Papa_no_Iukoto_wo_Kikinasai!",
+				"11285/Black★Rock_Shooter_(TV)",
+				"11341/Tantei_Opera_Milky_Holmes_2",
+				"8917/Mouretsu_Pirates",
+				"11235/Amagami_SS+_plus",
+				"11111/Another",
+				"11013/Inu_x_Boku_SS",
+				"11433/Ano_Natsu_de_Matteru",
+				"11241/Brave_10",
+				"11079/Kill_Me_Baby",
+				"11371/New_Prince_of_Tennis",
+				"11697/Area_no_Kishi",
+				"11491/Recorder_to_Randoseru",
+				"11843/Danshi_Koukousei_no_Nichijou",
+				"10447/Aquarion_Evol",
+				"11227/Rinne_no_Lagrange",
+				"11751/Senhime_Zesshou_Symphogear",
+				"12191/Smile_Precure!"
+			]
+			
 		}
 	
 	}
