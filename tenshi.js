@@ -1,5 +1,5 @@
 (function(w, d){
-	var apiAnime = 'http://kanade-api.appspot.com/v1/anime',
+	var apiAnime = 'http://kanadeapi.appspot.com/v1/anime',
 		malAnime = 'http://myanimelist.net/anime/',
 		animeItemTmpl = '<li id="anime-{id}">'
 			+ '<div class="img"><img src="{image}" width="50" height="70" alt="" onerror="this.src = this.src+\'?\'+(+new Date())"></div>'
