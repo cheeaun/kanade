@@ -23,17 +23,16 @@ body{
 }
 #page-seasons{
 	background-color: #cbd2d8;
-	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
-	background-image: -webkit-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -moz-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -ms-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -o-linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: linear-gradient(top, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	-webkit-background-size: 7px 100%;
-	-moz-background-size: 7px 100%;
-	-ms-background-size: 7px 100%;
-	-o-background-size: 7px 100%;
-	background-size: 7px 100%;
+	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -moz-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -ms-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: -o-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	-webkit-background-size: 7px 100px;
+	-moz-background-size: 7px 100px;
+	-ms-background-size: 7px 100px;
+	-o-background-size: 7px 100px;
+	background-size: 7px 100px;
 }
 header{
 	color: #fff;
