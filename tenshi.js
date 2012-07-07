@@ -287,13 +287,19 @@
 						} else {
 							var seasonsDiv = page.seasons;
 							addClass(startTarget, 'selected');
-							setTimeout(function(){
-								removeClass(seasonsDiv, 'in');
-								addClass(seasonsDiv, 'slideup out reverse');
+							if (w.innerWidth >= 480){
 								setTimeout(function(){
 									removeClass(startTarget, 'selected');
 								}, 350);
-							}, 600);
+							} else {
+								setTimeout(function(){
+									removeClass(seasonsDiv, 'in');
+									addClass(seasonsDiv, 'slideup out reverse');
+									setTimeout(function(){
+										removeClass(startTarget, 'selected');
+									}, 350);
+								}, 600);
+							}
 						}
 					}
 				};
