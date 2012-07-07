@@ -287,7 +287,7 @@
 						} else {
 							var seasonsDiv = page.seasons;
 							addClass(startTarget, 'selected');
-							if (w.innerWidth >= 480){
+							if (w.innerWidth >= 481){
 								setTimeout(function(){
 									removeClass(startTarget, 'selected');
 								}, 350);
