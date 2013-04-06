@@ -415,7 +415,7 @@
 		scroll.seasons.refresh();
 		
 		$show(seasonsButton);
-		tappable(seasonsButton, {
+		tappable('#seasons-button', {
 			noScroll: true,
 			onTap: function(){
 				var seasonsDiv = page.seasons;
@@ -428,7 +428,7 @@
 			}
 		});
 		
-		tappable(closeSeasonsButton, {
+		tappable('#close-seasons', {
 			noScroll: true,
 			onTap: function(){
 				var seasonsDiv = page.seasons;
@@ -440,7 +440,7 @@
 		loadPage();
 	});
 	
-	tappable(closeImageButton, {
+	tappable('#close-image', {
 		noScroll: true,
 		onTap: function(){
 			var imageDiv = page.image;

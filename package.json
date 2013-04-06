@@ -1,0 +1,11 @@
+{
+  "name": "kanade",
+  "version": "0.0.1",
+  "description": "A Mobile web app to list anime series for every season, with scores and stuff for easy comparison.",
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-connect": "~0.2.0",
+    "cheerio": "~0.10.8",
+    "request": "~2.16.6"
+  }
+}
