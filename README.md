@@ -17,7 +17,30 @@ Kanade is primarily optimized for Mobile Safari though it may work on other mobi
 - [Kizzy](https://github.com/ded/Kizzy)
 - [tappable](https://github.com/cheeaun/tappable)
 
+Development Stuff
+-----------------
+
+- Prerequisites
+
+        git clone git://github.com/cheeaun/kanade.git
+        cd kanade/
+        npm install
+
+- [Grunt](http://gruntjs.com/) tasks
+
+    - Concatenate and minify JS files
+
+            grunt uglify
+
+    - Start a local server
+
+            grunt connect
+
+- Simple app (web page + server) to search for animes in [MyAnimeList.net](http://myanimelist.net/)
+
+        node search/server.js
+
 Contributing
 ------------
 
-Feel free to fork and improve Kanade. One of the files that needs most attention is 'seasons.json' which stores data of lists of anime series for every season, so contributing these would be super awesome.
+Feel free to fork and improve Kanade. One of the files that needs most attention is `seasons.json` which stores data of lists of anime series for every season, so contributing these would be super awesome.
