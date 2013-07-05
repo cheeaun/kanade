@@ -11,6 +11,7 @@ http.createServer(function(req, res){
 		res.writeHead(200, {'Content-Type': 'text/html'});
 		var q = url.query.q;
 		var html = '<!doctype html>'
+			+ '<meta charset="utf-8">'
 			+ '<style>body{font-family: sans-serif} input{width:100%; font-size: 1.4em}</style>'
 			+ '<script>document.addEventListener("mouseup", function(e){if (e.target && e.target.select) e.target.select()}, true)</script>'
 			+ '<form action="" method="GET"><input type="search" name="q" value="' + (q || '') + '" placeholder="Search anime titles"></form>';
